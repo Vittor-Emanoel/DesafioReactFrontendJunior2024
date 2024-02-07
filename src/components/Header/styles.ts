@@ -5,8 +5,9 @@ export const HeaderContainer = styled.header`
   margin-top: 1.5rem;
 
   h1 {
-    font-size: 80px;
+    font-size: 88px;
     color: ${(props) => props.theme["red"]};
-    font-weight: 300;
+    font-weight: 200;
+    margin-bottom: 1.5rem;
   }
 `;
