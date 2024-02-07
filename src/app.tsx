@@ -1,6 +1,4 @@
-import React from "react";
-
-export default function App() {
+export function App() {
   return (
     <section>
       <h1>Todos</h1>
