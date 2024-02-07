@@ -1,7 +1,5 @@
+import { Home } from "./pages/home";
+
 export function App() {
-  return (
-    <section>
-      <h1>Todos</h1>
-    </section>
-  );
+  return <Home />;
 }

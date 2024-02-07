@@ -8,10 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    max-width: 550px;
-    min-width: 230px;
-    margin: 0 auto;
-    background: #f5f5f5;
+    background: ${(props) => props.theme["bg"]};
     -webkit-font-smoothing: antialiased;
   }
 
