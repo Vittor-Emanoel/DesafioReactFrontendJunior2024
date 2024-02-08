@@ -1,20 +1,30 @@
 import styled from "styled-components";
 
-export const InputContainer = styled.div`
+export const Container = styled.div`
   width: 100%;
   height: 65px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: relative;
 
-  > input {
+  p {
     width: 100%;
+    height: 65px;
+    background: #fff;
+    display: flex;
+    align-items: center;
     padding: 15px 15px 15px 60px;
     font-size: 24px;
+  }
+
+  input {
+    font-size: 24px;
+    padding: 15px 80px 15px 60px;
     outline: none;
     border: none;
-    transition: border-color 0.2s ease-in;
-    appearance: none;
-    font-style: italic;
+    background: #fff;
+    flex: 1;
     cursor: pointer;
 
     &::placeholder {
@@ -27,5 +37,21 @@ export const InputContainer = styled.div`
     top: 6px;
     left: 4px;
     cursor: pointer;
+  }
+`;
+
+export const DeletedTodoButton = styled.button`
+  width: 50px;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+
+  svg {
+    color: rgba(0, 0, 0, 0.4);
+
+    &:hover {
+      transition: colors 0.6s ease-out;
+      color: rgba(0, 0, 0, 1);
+    }
   }
 `;

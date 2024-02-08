@@ -1,28 +1,55 @@
 import { useState } from "react";
-import Checkbox from "../Checkbox";
-import { InputContainer } from "./styles";
+import Xicon from "../../icons/xicon";
 
-interface InputProps {
-  icon?: React.ReactNode;
-}
+import { Checkbox } from "../CheckBox";
+import { Container, DeletedTodoButton } from "./styles";
 
-export function TodoItem({ icon }: InputProps) {
+export function TodoItem() {
   const [checked, setChecked] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [text, setText] = useState("Comer muitoo");
+
+  const handleCheckboxChange = () => {
+    setChecked(!checked);
+  };
+
+  const handleDoubleClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setText(event.target.value);
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      setIsEditing(false);
+    }
+  };
 
   function handleChange() {
     setChecked(!checked);
   }
 
-  console.log(checked);
-
   return (
-    <InputContainer>
+    <Container>
       <div onClick={handleChange}>
         <Checkbox checked={checked} />
       </div>
-      <input />
-      {/*
-      {icon && <IconContainer>{"X"}</IconContainer>} */}
-    </InputContainer>
+      {isEditing ? (
+        <input
+          type="text"
+          value={text}
+          onChange={handleTextChange}
+          onKeyPress={handleKeyPress}
+          autoFocus
+        />
+      ) : (
+        <p onDoubleClick={handleDoubleClick}>{text}</p>
+      )}
+      <DeletedTodoButton>
+        <Xicon />
+      </DeletedTodoButton>
+    </Container>
   );
 }

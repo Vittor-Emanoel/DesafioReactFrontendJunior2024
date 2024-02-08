@@ -21,6 +21,7 @@ export const FooterContainer = styled.div`
 
     &:hover {
       text-decoration: underline;
+      cursor: pointer;
     }
   }
 `;
