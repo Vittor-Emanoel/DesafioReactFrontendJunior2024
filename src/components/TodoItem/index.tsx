@@ -4,8 +4,13 @@ import Xicon from "../../icons/xicon";
 import { Checkbox } from "../CheckBox";
 import { Container, DeletedTodoButton, Text } from "./styles";
 
-export function TodoItem() {
-  const [checked, setChecked] = useState(false);
+interface TodoItemProps {
+  title: string;
+  isDone: boolean;
+}
+
+export function TodoItem({ title, isDone }: TodoItemProps) {
+  const [checked, setChecked] = useState(isDone);
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState("Comer muitoo");
 
@@ -46,7 +51,7 @@ export function TodoItem() {
         />
       ) : (
         <Text checked={checked} onDoubleClick={handleDoubleClick}>
-          {text}
+          {title}
         </Text>
       )}
       <DeletedTodoButton>
