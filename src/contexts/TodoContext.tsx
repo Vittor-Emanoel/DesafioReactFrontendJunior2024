@@ -1,15 +1,26 @@
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { useSearchParams } from "react-router-dom";
 import { ITodo } from "../entities/Todo";
+import { ActionTypes } from "../reducers/actions";
+import { todosReducer } from "../reducers/reducer";
 import { todosService } from "../services/todos";
 
 interface TodoProviderValue {
   todos: ITodo[];
+  findForActiveTodo(): void;
 }
 
 export const TodoContext = createContext({} as TodoProviderValue);
 
 export function TodoProvider({ children }: { children: React.ReactNode }) {
+  const [state, dispatch] = useReducer(todosReducer, { todos: [] });
+
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [searchParams] = useSearchParams();
 
@@ -33,11 +44,20 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  function findForActiveTodo() {
+    dispatch({
+      type: ActionTypes.FIND_FOR_ACTIVE_TODOS,
+      payload: { todos: state.todos },
+    });
+  }
+
   useEffect(() => {
     loadTodos(filter);
   }, [filter, loadTodos]);
 
   return (
-    <TodoContext.Provider value={{ todos }}>{children}</TodoContext.Provider>
+    <TodoContext.Provider value={{ todos, findForActiveTodo }}>
+      {children}
+    </TodoContext.Provider>
   );
 }
