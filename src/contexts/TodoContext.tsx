@@ -15,10 +15,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
 
   const filter = searchParams.get("todos");
 
-  console.log(filter);
-  console.log(todos);
-
-  const filteredForAll = useCallback(async (filter: string | null) => {
+  const loadTodos = useCallback(async (filter: string | null) => {
     try {
       const result = await todosService.getAll();
 
@@ -37,8 +34,8 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    filteredForAll(filter);
-  }, [filter, filteredForAll]);
+    loadTodos(filter);
+  }, [filter, loadTodos]);
 
   return (
     <TodoContext.Provider value={{ todos }}>{children}</TodoContext.Provider>

@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { useSearchParams } from "react-router-dom";
+import { TodoContext } from "../../contexts/TodoContext";
 import { FiltersButton, FooterContainer, SummaryTodos } from "./styles";
 
 export function Footer() {
+  const { todos } = useContext(TodoContext);
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   interface Filters {
@@ -22,7 +26,7 @@ export function Footer() {
   return (
     <FooterContainer>
       <SummaryTodos>
-        <span>1 item left!</span>
+        <span>{`${todos.length} item left!`}</span>
       </SummaryTodos>
 
       <ul>
