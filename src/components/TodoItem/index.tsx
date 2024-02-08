@@ -34,7 +34,7 @@ export function TodoItem() {
   return (
     <Container>
       <div onClick={handleChange}>
-        <Checkbox checked={checked} />
+        <Checkbox checked={checked} onChange={() => handleCheckboxChange} />
       </div>
       {isEditing ? (
         <input
