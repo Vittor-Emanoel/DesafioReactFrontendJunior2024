@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { ITodo } from "../entities/Todo";
 import { todosService } from "../services/todos";
 
@@ -10,30 +11,34 @@ export const TodoContext = createContext({} as TodoProviderValue);
 
 export function TodoProvider({ children }: { children: React.ReactNode }) {
   const [todos, setTodos] = useState<ITodo[]>([]);
+  const [searchParams] = useSearchParams();
 
-  const filteredForAll = useCallback(async () => {
+  const filter = searchParams.get("todos");
+
+  console.log(filter);
+  console.log(todos);
+
+  const filteredForAll = useCallback(async (filter: string | null) => {
     try {
       const result = await todosService.getAll();
-      setTodos(result);
+
+      if (filter === "active") {
+        const active = result.filter((todo: ITodo) => !todo.isDone);
+        setTodos(active);
+      } else if (filter === "completed") {
+        const completed = result.filter((todo: ITodo) => todo.isDone);
+        setTodos(completed);
+      } else {
+        setTodos(result);
+      }
     } catch (error) {
       alert("deu ruim parceiro!!");
     }
   }, []);
 
-  const filteredForActive = todos.filter((todo) => {
-    return todo.isDone !== true;
-  });
-  const filteredForIsCompleted = todos.filter((todo) => {
-    return todo.isDone === true;
-  });
-
-  console.log(filteredForActive);
-
-  console.log(filteredForIsCompleted);
-
   useEffect(() => {
-    filteredForAll();
-  }, [filteredForAll]);
+    filteredForAll(filter);
+  }, [filter, filteredForAll]);
 
   return (
     <TodoContext.Provider value={{ todos }}>{children}</TodoContext.Provider>

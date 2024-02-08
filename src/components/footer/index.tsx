@@ -5,7 +5,7 @@ export function Footer() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   interface Filters {
-    param: "all" | "isDone" | "completed";
+    param: "all" | "active" | "completed";
   }
 
   function handleFilterTodos({ param }: Filters) {
@@ -32,7 +32,7 @@ export function Footer() {
           </FiltersButton>
         </li>
         <li>
-          <FiltersButton onClick={() => handleFilterTodos({ param: "isDone" })}>
+          <FiltersButton onClick={() => handleFilterTodos({ param: "active" })}>
             Active
           </FiltersButton>
         </li>
