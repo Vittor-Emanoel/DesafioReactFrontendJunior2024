@@ -1,4 +1,4 @@
-import { ChevronIcon } from "../../icons/chevron";
+import { ChevronIcon } from "../../assets/icons/chevron";
 import { Input } from "../Input";
 import { HeaderContainer } from "./styles";
 

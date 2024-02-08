@@ -1,23 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
-import { ITodo } from "../../entities/Todo";
-import { todosService } from "../../services/todos";
+import { useContext } from "react";
+import { TodoContext } from "../../contexts/TodoContext";
 import { TodoItem } from "../TodoItem";
 
 export function Main() {
-  const [todos, setTodos] = useState<ITodo[]>([]);
-
-  const loadTodos = useCallback(async () => {
-    try {
-      const result = await todosService.getAll();
-      setTodos(result);
-    } catch (error) {
-      alert("deu ruim parceiro!!");
-    }
-  }, []);
-
-  useEffect(() => {
-    loadTodos();
-  }, [loadTodos]);
+  const { todos } = useContext(TodoContext);
 
   return (
     <div>

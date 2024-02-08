@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Xicon from "../../icons/xicon";
+import Xicon from "../../assets/icons/xicon";
 
 import { Checkbox } from "../CheckBox";
 import { Container, DeletedTodoButton, Text } from "./styles";
@@ -12,7 +12,7 @@ interface TodoItemProps {
 export function TodoItem({ title, isDone }: TodoItemProps) {
   const [checked, setChecked] = useState(isDone);
   const [isEditing, setIsEditing] = useState(false);
-  const [text, setText] = useState("Comer muitoo");
+  const [text, setText] = useState(title);
 
   const handleCheckboxChange = () => {
     setChecked(!checked);
