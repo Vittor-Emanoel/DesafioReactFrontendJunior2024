@@ -16,6 +16,7 @@ export const Container = styled.div`
     align-items: center;
     padding: 15px 15px 15px 60px;
     font-size: 24px;
+    border-top: 1px solid ${(props) => props.theme["border"]};
   }
 
   input {
@@ -26,9 +27,14 @@ export const Container = styled.div`
     background: #fff;
     flex: 1;
     cursor: pointer;
+    border-top: 1px solid ${(props) => props.theme["border"]};
 
     &::placeholder {
       color: rgba(0, 0, 0, 0.4);
+    }
+
+    &:focus {
+      box-shadow: 0 0 2px 2px #cf7d7d;
     }
   }
 

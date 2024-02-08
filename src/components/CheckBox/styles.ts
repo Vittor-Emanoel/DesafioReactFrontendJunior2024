@@ -35,7 +35,8 @@ export const StyledCheckbox = styled.div<CheckboxProps>`
   height: 30px;
   border-radius: 50%;
   transition: all 150ms;
-  border: 1px solid #777777;
+  border: 1px solid
+    ${(props) => (props.checked ? "green" : props.theme["gray-400"])};
   cursor: pointer;
 
   ${Icon} {

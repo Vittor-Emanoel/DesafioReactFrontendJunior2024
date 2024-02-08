@@ -11,7 +11,7 @@ export const InputContainer = styled.div`
     padding: 15px 15px 15px 60px;
     font-size: 24px;
     outline: none;
-    border: 1px solid #e2e2e2;
+    border: 0;
     transition: border-color 0.2s ease-in;
     font-style: italic;
     cursor: pointer;
