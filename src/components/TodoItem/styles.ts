@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface TextProps {
+  checked: boolean;
+}
+
 export const Container = styled.div`
   width: 100%;
   height: 65px;
@@ -60,4 +64,10 @@ export const DeletedTodoButton = styled.button`
       color: rgba(0, 0, 0, 1);
     }
   }
+`;
+
+export const Text = styled.p<TextProps>`
+  text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
+  color: ${(props) =>
+    props.checked ? props.theme["completed"] : props.theme["gray-500"]};
 `;

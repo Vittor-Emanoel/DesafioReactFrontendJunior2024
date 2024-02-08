@@ -2,7 +2,7 @@ import { useState } from "react";
 import Xicon from "../../icons/xicon";
 
 import { Checkbox } from "../CheckBox";
-import { Container, DeletedTodoButton } from "./styles";
+import { Container, DeletedTodoButton, Text } from "./styles";
 
 export function TodoItem() {
   const [checked, setChecked] = useState(false);
@@ -45,7 +45,9 @@ export function TodoItem() {
           autoFocus
         />
       ) : (
-        <p onDoubleClick={handleDoubleClick}>{text}</p>
+        <Text checked={checked} onDoubleClick={handleDoubleClick}>
+          {text}
+        </Text>
       )}
       <DeletedTodoButton>
         <Xicon />
