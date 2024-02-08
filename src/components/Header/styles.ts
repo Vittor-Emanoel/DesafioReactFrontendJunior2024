@@ -2,12 +2,17 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
   width: 100%;
-  margin-top: 1.5rem;
+  position: relative;
 
   h1 {
-    font-size: 88px;
+    font-size: 80px;
+    position: absolute;
     color: ${(props) => props.theme["red"]};
     font-weight: 200;
-    margin-bottom: 1.5rem;
+    top: -50px;
+    bottom: 0;
+    right: 50%;
+
+    transform: translate(50%, -50%);
   }
 `;

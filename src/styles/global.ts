@@ -12,6 +12,15 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
+  ul > li {
+    list-style: none;
+  }
+
+  button {
+    border: 0;
+    background: transparent;
+  }
+
   body, input, textarea, button {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
