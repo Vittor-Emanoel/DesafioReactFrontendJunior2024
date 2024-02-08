@@ -11,7 +11,7 @@ export const TodoContext = createContext({} as TodoProviderValue);
 export function TodoProvider({ children }: { children: React.ReactNode }) {
   const [todos, setTodos] = useState<ITodo[]>([]);
 
-  const loadTodos = useCallback(async () => {
+  const filteredForAll = useCallback(async () => {
     try {
       const result = await todosService.getAll();
       setTodos(result);
@@ -20,9 +20,20 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  const filteredForActive = todos.filter((todo) => {
+    return todo.isDone !== true;
+  });
+  const filteredForIsCompleted = todos.filter((todo) => {
+    return todo.isDone === true;
+  });
+
+  console.log(filteredForActive);
+
+  console.log(filteredForIsCompleted);
+
   useEffect(() => {
-    loadTodos();
-  }, [loadTodos]);
+    filteredForAll();
+  }, [filteredForAll]);
 
   return (
     <TodoContext.Provider value={{ todos }}>{children}</TodoContext.Provider>
