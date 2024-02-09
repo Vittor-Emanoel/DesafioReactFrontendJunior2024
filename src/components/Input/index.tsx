@@ -22,6 +22,7 @@ export function Input({ placeholder, icon }: InputProps) {
       title: value,
       isDone: false,
     });
+    setValue("");
   };
 
   return (

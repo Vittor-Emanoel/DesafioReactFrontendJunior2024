@@ -20,6 +20,7 @@ export function TodoItem({ title, isDone, item, ...props }: TodoItemProps) {
 
   const handleCheckboxChange = () => {
     setChecked(!checked);
+    handleUpdateItem({ id: item.id, title: text, isDone: checked });
   };
 
   const handleDoubleClick = () => {
@@ -28,7 +29,7 @@ export function TodoItem({ title, isDone, item, ...props }: TodoItemProps) {
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
-    handleUpdateItem({ id: item.id, title: text, isDone: item.isDone });
+    handleUpdateItem({ id: item.id, title: text, isDone: checked });
   };
 
   function handleChange() {
