@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { TodoContext } from "../../contexts/TodoContext";
 import { FiltersButton, FooterContainer, SummaryTodos } from "./styles";
@@ -6,14 +6,16 @@ import { FiltersButton, FooterContainer, SummaryTodos } from "./styles";
 export function Footer() {
   const { isClearCompleted, totalOutstanding } = useContext(TodoContext);
   const [activeFilter, setActiveFilter] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [, setSearchParams] = useSearchParams();
+  useEffect(() => {
+    const todosParam = searchParams.get("todos");
+    if (todosParam) {
+      setActiveFilter(todosParam);
+    }
+  }, [searchParams]);
 
-  interface Filters {
-    param: "all" | "active" | "completed";
-  }
-
-  function handleFilterTodos({ param }: Filters) {
+  function handleFilterTodos(param: "all" | "active" | "completed") {
     setSearchParams((state) => {
       if (param) {
         state.set("todos", param);
@@ -39,7 +41,7 @@ export function Footer() {
         <li>
           <FiltersButton
             active={activeFilter === "all"}
-            onClick={() => handleFilterTodos({ param: "all" })}
+            onClick={() => handleFilterTodos("all")}
           >
             All
           </FiltersButton>
@@ -47,7 +49,7 @@ export function Footer() {
         <li>
           <FiltersButton
             active={activeFilter === "active"}
-            onClick={() => handleFilterTodos({ param: "active" })}
+            onClick={() => handleFilterTodos("active")}
           >
             Active
           </FiltersButton>
@@ -55,7 +57,7 @@ export function Footer() {
         <li>
           <FiltersButton
             active={activeFilter === "completed"}
-            onClick={() => handleFilterTodos({ param: "completed" })}
+            onClick={() => handleFilterTodos("completed")}
           >
             Completed
           </FiltersButton>

@@ -12,9 +12,9 @@ export const InputContainer = styled.form`
     font-size: 24px;
     outline: none;
     border: 0;
-    transition: border-color 0.2s ease-in;
     font-style: italic;
     cursor: pointer;
+    z-index: 100;
 
     &::placeholder {
       color: rgba(0, 0, 0, 0.4);
