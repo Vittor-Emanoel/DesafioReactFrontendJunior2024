@@ -7,9 +7,10 @@ interface TodoProviderValue {
   todos: ITodo[];
   totalOutstanding: number;
   handleAddItem: (data: ITodo) => void;
-  deleteAllTodos: () => void;
+  isClearAllTodos: () => void;
   deleteItem: (id: string) => void;
-  handleUpdateItem: (data: ITodo) => void;
+  updatedItemHandler: (data: ITodo) => void;
+  isClearCompleted: () => void;
 }
 
 export const TodoContext = createContext({} as TodoProviderValue);
@@ -23,14 +24,13 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     try {
       const result = await todosService.getAll();
       const filteredTodos = applyFilter(result, filter);
-
       setTodos(filteredTodos);
     } catch (error) {
       alert("deu ruim parceiro!!");
     }
   }, [filter]);
 
-  function handleUpdateItem(data: ITodo) {
+  function updatedItemHandler(data: ITodo) {
     const updatedTodos = todos.map((item) => {
       if (item.id === data.id) {
         return {
@@ -38,34 +38,36 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
           title: data.title,
           isDone: data.isDone,
         };
-      } else {
-        return item;
       }
+
+      return item;
     });
 
     setTodos(updatedTodos);
   }
 
-  function handleAddItem(data: ITodo) {
-    setTodos([data, ...todos]);
+  function handleAddItem(item: ITodo) {
+    setTodos([item, ...todos]);
   }
 
-  const deleteAllTodos = useCallback(() => {
+  function isClearAllTodos() {
     setTodos([]);
-  }, []);
+  }
+
+  function isClearCompleted() {
+    setTodos(todos.filter((item) => item.isDone !== true));
+  }
+
+  function deleteItem(itemId: string) {
+    setTodos(todos.filter((item) => item.id !== itemId));
+  }
 
   const totalOutstanding = todos.reduce((acc, value) => {
     if (!value.isDone) {
       return acc + 1;
     }
-
     return acc;
   }, 0);
-
-  function deleteItem(id: string) {
-    const removeItem = todos.filter((item) => item.id !== id);
-    setTodos([...removeItem]);
-  }
 
   const applyFilter = (todos: ITodo[], filter: string | null): ITodo[] => {
     switch (filter) {
@@ -87,10 +89,11 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
       value={{
         todos,
         handleAddItem,
-        deleteAllTodos,
+        isClearAllTodos,
         deleteItem,
-        handleUpdateItem,
+        updatedItemHandler,
         totalOutstanding,
+        isClearCompleted,
       }}
     >
       {children}

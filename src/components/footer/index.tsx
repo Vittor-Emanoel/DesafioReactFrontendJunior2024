@@ -4,9 +4,9 @@ import { TodoContext } from "../../contexts/TodoContext";
 import { FiltersButton, FooterContainer, SummaryTodos } from "./styles";
 
 export function Footer() {
-  const { todos, deleteAllTodos, totalOutstanding } = useContext(TodoContext);
+  const { isClearCompleted, totalOutstanding } = useContext(TodoContext);
 
-  const [_, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
   interface Filters {
     param: "all" | "active" | "completed";
@@ -26,7 +26,11 @@ export function Footer() {
   return (
     <FooterContainer>
       <SummaryTodos>
-        <span>{`${totalOutstanding} item left!`}</span>
+        <span>
+          {totalOutstanding > 1
+            ? `${totalOutstanding} items left!`
+            : `${totalOutstanding} item left!`}
+        </span>
       </SummaryTodos>
 
       <ul>
@@ -49,7 +53,7 @@ export function Footer() {
         </li>
       </ul>
 
-      <button onClick={deleteAllTodos}>Clear completed</button>
+      <button onClick={isClearCompleted}>Clear completed</button>
     </FooterContainer>
   );
 }

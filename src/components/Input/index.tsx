@@ -9,7 +9,7 @@ interface InputProps {
 
 export function Input({ placeholder, icon }: InputProps) {
   const [value, setValue] = useState("");
-  const { todos, deleteAllTodos, handleAddItem } = useContext(TodoContext);
+  const { todos, isClearAllTodos, handleAddItem } = useContext(TodoContext);
 
   const handleChange = (event: any) => {
     setValue(event.target.value);
@@ -28,7 +28,7 @@ export function Input({ placeholder, icon }: InputProps) {
   return (
     <InputContainer onSubmit={handleSubmit}>
       {icon && todos.length > 0 && (
-        <IconContainer onClick={deleteAllTodos}>{icon}</IconContainer>
+        <IconContainer onClick={isClearAllTodos}>{icon}</IconContainer>
       )}
       <input value={value} onChange={handleChange} placeholder={placeholder} />
     </InputContainer>
