@@ -6,11 +6,11 @@ import { defaultTheme } from "./styles/themes/default";
 
 export function App() {
   return (
-    <TodoProvider>
-      <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={defaultTheme}>
+      <TodoProvider>
         <Home />
         <GlobalStyle />
-      </ThemeProvider>
-    </TodoProvider>
+      </TodoProvider>
+    </ThemeProvider>
   );
 }

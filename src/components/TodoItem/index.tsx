@@ -18,11 +18,6 @@ export function TodoItem({ title, isDone, item, ...props }: TodoItemProps) {
   const [text, setText] = useState(title);
   const { deleteItem, handleUpdateItem } = useContext(TodoContext);
 
-  const handleCheckboxChange = () => {
-    setChecked(!checked);
-    handleUpdateItem({ id: item.id, title: text, isDone: checked });
-  };
-
   const handleDoubleClick = () => {
     setIsEditing(true);
   };
@@ -33,13 +28,15 @@ export function TodoItem({ title, isDone, item, ...props }: TodoItemProps) {
   };
 
   function handleChange() {
-    setChecked(!checked);
+    const newChecked = !checked;
+    setChecked(newChecked);
+    handleUpdateItem({ id: item.id, title: text, isDone: newChecked });
   }
 
   return (
     <Container>
       <div onClick={handleChange}>
-        <Checkbox checked={checked} onChange={handleCheckboxChange} />
+        <Checkbox checked={checked} onChange={handleChange} />
       </div>
       {isEditing ? (
         <input

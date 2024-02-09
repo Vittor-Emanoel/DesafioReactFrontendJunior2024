@@ -5,10 +5,11 @@ import { todosService } from "../services/todos";
 
 interface TodoProviderValue {
   todos: ITodo[];
+  totalOutstanding: number;
   handleAddItem: (data: ITodo) => void;
   deleteAllTodos: () => void;
   deleteItem: (id: string) => void;
-  handleUpdateItem: (data: ITodo) => ITodo;
+  handleUpdateItem: (data: ITodo) => void;
 }
 
 export const TodoContext = createContext({} as TodoProviderValue);
@@ -30,13 +31,19 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   }, [filter]);
 
   function handleUpdateItem(data: ITodo) {
-    return todos.map((item) => item.id === data.id)
-      ? {
-          ...data,
+    const updatedTodos = todos.map((item) => {
+      if (item.id === data.id) {
+        return {
+          ...item,
           title: data.title,
           isDone: data.isDone,
-        }
-      : data;
+        };
+      } else {
+        return item;
+      }
+    });
+
+    setTodos(updatedTodos);
   }
 
   function handleAddItem(data: ITodo) {
@@ -46,6 +53,14 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   const deleteAllTodos = useCallback(() => {
     setTodos([]);
   }, []);
+
+  const totalOutstanding = todos.reduce((acc, value) => {
+    if (!value.isDone) {
+      return acc + 1;
+    }
+
+    return acc;
+  }, 0);
 
   function deleteItem(id: string) {
     const removeItem = todos.filter((item) => item.id !== id);
@@ -75,6 +90,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
         deleteAllTodos,
         deleteItem,
         handleUpdateItem,
+        totalOutstanding,
       }}
     >
       {children}

@@ -4,17 +4,13 @@ import { TodoContext } from "../../contexts/TodoContext";
 import { FiltersButton, FooterContainer, SummaryTodos } from "./styles";
 
 export function Footer() {
-  const { todos, deleteAllTodos } = useContext(TodoContext);
+  const { todos, deleteAllTodos, totalOutstanding } = useContext(TodoContext);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
 
   interface Filters {
     param: "all" | "active" | "completed";
   }
-
-  console.log(todos);
-
-  const todosNotCompleted = todos.filter((todo) => todo.isDone === false);
 
   function handleFilterTodos({ param }: Filters) {
     setSearchParams((state) => {
@@ -30,7 +26,7 @@ export function Footer() {
   return (
     <FooterContainer>
       <SummaryTodos>
-        <span>{`${todosNotCompleted.length} item left!`}</span>
+        <span>{`${totalOutstanding} item left!`}</span>
       </SummaryTodos>
 
       <ul>
