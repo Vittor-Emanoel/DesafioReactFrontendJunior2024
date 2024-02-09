@@ -48,6 +48,10 @@ export const Container = styled.div`
     left: 4px;
     cursor: pointer;
   }
+
+  &:hover button {
+    display: block;
+  }
 `;
 
 export const DeletedTodoButton = styled.button`
@@ -55,6 +59,7 @@ export const DeletedTodoButton = styled.button`
   position: absolute;
   right: 10px;
   cursor: pointer;
+  display: none;
 
   svg {
     color: rgba(0, 0, 0, 0.4);
