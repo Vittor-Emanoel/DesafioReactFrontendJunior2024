@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface FiltersButtonProps {
+  active: boolean;
+}
+
 export const FooterContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -32,13 +36,14 @@ export const SummaryTodos = styled.div`
   }
 `;
 
-export const FiltersButton = styled.button`
+export const FiltersButton = styled.button<FiltersButtonProps>`
   padding: 0.3rem 0.5rem;
   border: 0;
   cursor: pointer;
   border-radius: 2px;
   transition: border ease-in 0.2s;
-  border: 1px solid ${(props) => props.theme["white"]};
+  border: 1px solid
+    ${(props) => (props.active ? props.theme["red"] : props.theme["white"])};
 
   &:hover {
     border: 1px solid ${(props) => props.theme["red"]};

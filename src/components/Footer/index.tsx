@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { TodoContext } from "../../contexts/TodoContext";
 import { FiltersButton, FooterContainer, SummaryTodos } from "./styles";
 
 export function Footer() {
   const { isClearCompleted, totalOutstanding } = useContext(TodoContext);
+  const [activeFilter, setActiveFilter] = useState("");
 
   const [, setSearchParams] = useSearchParams();
 
@@ -21,6 +22,7 @@ export function Footer() {
       }
       return state;
     });
+    setActiveFilter(param);
   }
 
   return (
@@ -35,17 +37,24 @@ export function Footer() {
 
       <ul>
         <li>
-          <FiltersButton onClick={() => handleFilterTodos({ param: "all" })}>
+          <FiltersButton
+            active={activeFilter === "all"}
+            onClick={() => handleFilterTodos({ param: "all" })}
+          >
             All
           </FiltersButton>
         </li>
         <li>
-          <FiltersButton onClick={() => handleFilterTodos({ param: "active" })}>
+          <FiltersButton
+            active={activeFilter === "active"}
+            onClick={() => handleFilterTodos({ param: "active" })}
+          >
             Active
           </FiltersButton>
         </li>
         <li>
           <FiltersButton
+            active={activeFilter === "completed"}
             onClick={() => handleFilterTodos({ param: "completed" })}
           >
             Completed

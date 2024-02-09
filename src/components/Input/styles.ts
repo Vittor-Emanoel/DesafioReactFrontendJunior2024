@@ -30,9 +30,16 @@ export const IconContainer = styled.div`
   position: absolute;
   top: 15px;
   left: 10px;
+  cursor: pointer;
 
   svg {
     font-weight: bold;
-    color: #747264;
+    color: ${(props) => props.theme["gray-500"]};
+
+    transition: colors 0.2s ease;
+
+    &:hover {
+      color: ${(props) => props.theme["gray-700"]};
+    }
   }
 `;
