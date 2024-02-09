@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Xicon from "../../assets/icons/xicon";
 
+import { TodoContext } from "../../contexts/TodoContext";
 import { Checkbox } from "../CheckBox";
 import { Container, DeletedTodoButton, Text } from "./styles";
 
@@ -13,6 +14,7 @@ export function TodoItem({ title, isDone }: TodoItemProps) {
   const [checked, setChecked] = useState(isDone);
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(title);
+  const { handleEditTodo } = useContext(TodoContext);
 
   const handleCheckboxChange = () => {
     setChecked(!checked);
@@ -29,6 +31,7 @@ export function TodoItem({ title, isDone }: TodoItemProps) {
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       setIsEditing(false);
+      handleEditTodo({ id: Math.random().toString(), title, isDone: false });
     }
   };
 

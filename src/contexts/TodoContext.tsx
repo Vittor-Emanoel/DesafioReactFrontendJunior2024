@@ -6,6 +6,7 @@ import { todosService } from "../services/todos";
 interface TodoProviderValue {
   todos: ITodo[];
   handleAddTodo: (data: ITodo) => void;
+  handleEditTodo: (data: ITodo) => void;
 }
 
 export const TodoContext = createContext({} as TodoProviderValue);
@@ -28,23 +29,16 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     setTodos([data, ...todos]);
   }
 
-  // const addNewTodo = useCallback(
-  //   (data: ITodo[]) => {
-  //     setTodos([...todos, ...data]);
-  //   },
-  //   [todos]
-  // );
-
-  const deleteAllTodos = useCallback(() => {
-    setTodos([]);
-  }, []);
+  function handleEditTodo(data: ITodo) {
+    setTodos([data, ...todos]);
+  }
 
   useEffect(() => {
     loadTodos();
   }, [filter, loadTodos]);
 
   return (
-    <TodoContext.Provider value={{ todos, handleAddTodo }}>
+    <TodoContext.Provider value={{ todos, handleAddTodo, handleEditTodo }}>
       {children}
     </TodoContext.Provider>
   );
