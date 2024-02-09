@@ -1,20 +1,20 @@
-import { useContext, useState } from "react";
+import { ComponentProps, useState } from "react";
 import Xicon from "../../assets/icons/xicon";
 
-import { TodoContext } from "../../contexts/TodoContext";
+import { ITodo } from "../../entities/Todo";
 import { Checkbox } from "../CheckBox";
 import { Container, DeletedTodoButton, Text } from "./styles";
 
-interface TodoItemProps {
+interface TodoItemProps extends ComponentProps<"input"> {
   title: string;
   isDone: boolean;
+  item: ITodo;
 }
 
-export function TodoItem({ title, isDone }: TodoItemProps) {
+export function TodoItem({ title, isDone, item, ...props }: TodoItemProps) {
   const [checked, setChecked] = useState(isDone);
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(title);
-  const { handleEditTodo } = useContext(TodoContext);
 
   const handleCheckboxChange = () => {
     setChecked(!checked);
@@ -28,13 +28,6 @@ export function TodoItem({ title, isDone }: TodoItemProps) {
     setText(event.target.value);
   };
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      setIsEditing(false);
-      handleEditTodo({ id: Math.random().toString(), title, isDone: false });
-    }
-  };
-
   function handleChange() {
     setChecked(!checked);
   }
@@ -42,15 +35,15 @@ export function TodoItem({ title, isDone }: TodoItemProps) {
   return (
     <Container>
       <div onClick={handleChange}>
-        <Checkbox checked={checked} onChange={() => handleCheckboxChange} />
+        <Checkbox checked={checked} onChange={handleCheckboxChange} />
       </div>
       {isEditing ? (
         <input
           type="text"
           value={text}
           onChange={handleTextChange}
-          onKeyPress={handleKeyPress}
           autoFocus
+          {...props}
         />
       ) : (
         <Text checked={checked} onDoubleClick={handleDoubleClick}>

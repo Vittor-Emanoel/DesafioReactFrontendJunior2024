@@ -4,7 +4,7 @@ import { TodoContext } from "../../contexts/TodoContext";
 import { FiltersButton, FooterContainer, SummaryTodos } from "./styles";
 
 export function Footer() {
-  const { todos } = useContext(TodoContext);
+  const { todos, deleteAllTodos } = useContext(TodoContext);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -51,7 +51,7 @@ export function Footer() {
         </li>
       </ul>
 
-      <button>Clear completed</button>
+      <button onClick={deleteAllTodos}>Clear completed</button>
     </FooterContainer>
   );
 }

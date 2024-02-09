@@ -1,31 +1,33 @@
-import React, { ComponentProps } from "react";
+import React, { useContext, useState } from "react";
+import { TodoContext } from "../../contexts/TodoContext";
 import { IconContainer, InputContainer } from "./styles";
 
-interface InputProps extends ComponentProps<"input"> {
-  type: string;
+interface InputProps {
   icon?: React.ReactNode;
   placeholder: string;
-  onChange: (event: any) => void;
-  onSubmit: (event: any) => void;
 }
 
-export function Input({
-  onSubmit,
-  onChange,
-  placeholder,
-  icon,
-  title,
-  ...props
-}: InputProps) {
+export function Input({ placeholder, icon }: InputProps) {
+  const [value, setValue] = useState("");
+  const { handleAddItem } = useContext(TodoContext);
+
+  const handleChange = (event: any) => {
+    setValue(event.target.value);
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    handleAddItem({
+      id: Math.random().toString(),
+      title: value,
+      isDone: false,
+    });
+  };
+
   return (
-    <InputContainer onSubmit={onSubmit}>
+    <InputContainer onSubmit={handleSubmit}>
       {icon && <IconContainer>{icon}</IconContainer>}
-      <input
-        value={title}
-        onChange={onChange}
-        placeholder={placeholder}
-        {...props}
-      />
+      <input value={value} onChange={handleChange} placeholder={placeholder} />
     </InputContainer>
   );
 }
