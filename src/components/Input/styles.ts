@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.form`
   width: 100%;
   height: 65px;
   position: relative;

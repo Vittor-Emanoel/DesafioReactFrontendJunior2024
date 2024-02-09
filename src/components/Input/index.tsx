@@ -1,3 +1,5 @@
+import React, { useContext, useState } from "react";
+import { TodoContext } from "../../contexts/TodoContext";
 import { IconContainer, InputContainer } from "./styles";
 
 interface InputProps {
@@ -6,10 +8,26 @@ interface InputProps {
 }
 
 export function Input({ placeholder, icon }: InputProps) {
+  const [value, setValue] = useState("");
+  const { handleAddTodo } = useContext(TodoContext);
+
+  const handleChange = (event: any) => {
+    setValue(event.target.value);
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    handleAddTodo({
+      id: Math.random().toString(),
+      title: value,
+      isDone: false,
+    });
+  };
+
   return (
-    <InputContainer>
+    <InputContainer onSubmit={handleSubmit}>
       {icon && <IconContainer>{icon}</IconContainer>}
-      <input placeholder={placeholder} />
+      <input value={value} onChange={handleChange} placeholder={placeholder} />
     </InputContainer>
   );
 }

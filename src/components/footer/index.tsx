@@ -12,6 +12,8 @@ export function Footer() {
     param: "all" | "active" | "completed";
   }
 
+  const todosNotCompleted = todos.filter((todo) => todo.isDone === false);
+
   function handleFilterTodos({ param }: Filters) {
     setSearchParams((state) => {
       if (param) {
@@ -26,7 +28,7 @@ export function Footer() {
   return (
     <FooterContainer>
       <SummaryTodos>
-        <span>{`${todos.length} item left!`}</span>
+        <span>{`${todosNotCompleted.length} item left!`}</span>
       </SummaryTodos>
 
       <ul>
