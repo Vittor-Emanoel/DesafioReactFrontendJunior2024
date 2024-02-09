@@ -1,6 +1,7 @@
-import { ComponentProps, useState } from "react";
+import { ComponentProps, useContext, useState } from "react";
 import Xicon from "../../assets/icons/xicon";
 
+import { TodoContext } from "../../contexts/TodoContext";
 import { ITodo } from "../../entities/Todo";
 import { Checkbox } from "../CheckBox";
 import { Container, DeletedTodoButton, Text } from "./styles";
@@ -15,6 +16,7 @@ export function TodoItem({ title, isDone, item, ...props }: TodoItemProps) {
   const [checked, setChecked] = useState(isDone);
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(title);
+  const { deleteItem, handleUpdateItem } = useContext(TodoContext);
 
   const handleCheckboxChange = () => {
     setChecked(!checked);
@@ -26,6 +28,7 @@ export function TodoItem({ title, isDone, item, ...props }: TodoItemProps) {
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
+    handleUpdateItem({ id: item.id, title: text, isDone: item.isDone });
   };
 
   function handleChange() {
@@ -50,7 +53,7 @@ export function TodoItem({ title, isDone, item, ...props }: TodoItemProps) {
           {title}
         </Text>
       )}
-      <DeletedTodoButton>
+      <DeletedTodoButton onClick={() => deleteItem(item.id)}>
         <Xicon />
       </DeletedTodoButton>
     </Container>

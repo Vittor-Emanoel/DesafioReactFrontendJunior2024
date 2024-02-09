@@ -12,6 +12,8 @@ export function Footer() {
     param: "all" | "active" | "completed";
   }
 
+  console.log(todos);
+
   const todosNotCompleted = todos.filter((todo) => todo.isDone === false);
 
   function handleFilterTodos({ param }: Filters) {

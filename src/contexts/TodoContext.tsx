@@ -7,6 +7,8 @@ interface TodoProviderValue {
   todos: ITodo[];
   handleAddItem: (data: ITodo) => void;
   deleteAllTodos: () => void;
+  deleteItem: (id: string) => void;
+  handleUpdateItem: (data: ITodo) => ITodo;
 }
 
 export const TodoContext = createContext({} as TodoProviderValue);
@@ -27,6 +29,16 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     }
   }, [filter]);
 
+  function handleUpdateItem(data: ITodo) {
+    return todos.map((item) => item.id === data.id)
+      ? {
+          ...data,
+          title: data.title,
+          isDone: data.isDone,
+        }
+      : data;
+  }
+
   function handleAddItem(data: ITodo) {
     setTodos([data, ...todos]);
   }
@@ -34,6 +46,11 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   const deleteAllTodos = useCallback(() => {
     setTodos([]);
   }, []);
+
+  function deleteItem(id: string) {
+    const removeItem = todos.filter((item) => item.id !== id);
+    setTodos([...removeItem]);
+  }
 
   const applyFilter = (todos: ITodo[], filter: string | null): ITodo[] => {
     switch (filter) {
@@ -51,7 +68,15 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   }, [filter, loadTodos]);
 
   return (
-    <TodoContext.Provider value={{ todos, handleAddItem, deleteAllTodos }}>
+    <TodoContext.Provider
+      value={{
+        todos,
+        handleAddItem,
+        deleteAllTodos,
+        deleteItem,
+        handleUpdateItem,
+      }}
+    >
       {children}
     </TodoContext.Provider>
   );
