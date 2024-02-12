@@ -56,7 +56,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   }
 
   function handleToggleAllDone() {
-    setTodos(
+    return setTodos(
       todos.map((item) => ({
         ...item,
         isDone: true,

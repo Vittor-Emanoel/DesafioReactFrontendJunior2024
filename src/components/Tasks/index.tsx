@@ -9,7 +9,7 @@ export function Tasks() {
     <div>
       {todos.map((item) => (
         <div key={item.id!}>
-          <TaskItem title={item.title} isDone={item.isDone} item={item} />
+          <TaskItem item={item} />
         </div>
       ))}
     </div>

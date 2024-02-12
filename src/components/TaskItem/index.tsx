@@ -7,15 +7,13 @@ import { Checkbox } from "../CheckBox";
 import { Container, DeletedTodoButton } from "./styles";
 
 interface TaskItemProps extends ComponentProps<"input"> {
-  title: string;
-  isDone: boolean;
   item: ITodo;
 }
 
-export function TaskItem({ title, isDone, item, ...props }: TaskItemProps) {
-  const [checked, setChecked] = useState(isDone);
+export function TaskItem({ item, ...props }: TaskItemProps) {
+  const [checked, setChecked] = useState(item.isDone);
   const [isEditing, setIsEditing] = useState(false);
-  const [inputTitle, setInputTitle] = useState(title);
+  const [inputTitle, setInputTitle] = useState(item.title);
   const { deleteItem, updatedItemHandler } = useContext(TodoContext);
 
   const handleDoubleClick = () => {
@@ -32,10 +30,11 @@ export function TaskItem({ title, isDone, item, ...props }: TaskItemProps) {
     setChecked(newChecked);
     updatedItemHandler({ id: item.id, title: inputTitle, isDone: newChecked });
   }
+
   return (
-    <Container $mark={checked}>
+    <Container $mark={item.isDone}>
       <div onClick={handleChange}>
-        <Checkbox checked={checked} onChange={handleChange} />
+        <Checkbox checked={item.isDone} onChange={handleChange} />
       </div>
       {isEditing ? (
         <input
