@@ -16,38 +16,38 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
   const [inputTitle, setInputTitle] = useState(item.title);
   const { deleteItem, updatedItemHandler } = useContext(TodoContext);
 
-  const handleDoubleClick = () => {
-    setIsEditing(true);
+  const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputTitle(event.target.value);
   };
 
-  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputTitle(event.target.value);
+  const handleEdit = () => {
+    setIsEditing(false);
     updatedItemHandler({ id: item.id, title: inputTitle, isDone: checked });
   };
 
-  function handleChange() {
-    const newChecked = !checked;
-    setChecked(newChecked);
-    updatedItemHandler({ id: item.id, title: inputTitle, isDone: newChecked });
+  function handleChecked() {
+    const state = !checked;
+    setChecked(state);
+    updatedItemHandler({ id: item.id, title: inputTitle, isDone: state });
   }
 
   return (
     <Container $mark={item.isDone}>
-      <div onClick={handleChange}>
-        <Checkbox checked={item.isDone} onChange={handleChange} />
+      <div onClick={handleChecked}>
+        <Checkbox checked={item.isDone} onChange={handleChecked} />
       </div>
       {isEditing ? (
         <input
           type="text"
           defaultValue={inputTitle}
-          onChange={handleTextChange}
-          autoFocus
+          onChange={handleChangeTitle}
+          onBlur={handleEdit}
           {...props}
         />
       ) : (
         <input
           type="text"
-          onDoubleClick={handleDoubleClick}
+          onDoubleClick={() => setIsEditing(true)}
           defaultValue={inputTitle}
         />
       )}
