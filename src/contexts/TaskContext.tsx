@@ -1,38 +1,38 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ITodo } from "../entities/Todo";
-import { todosService } from "../services/todos";
+import { ITask } from "../entities/Task";
+import { tasksService } from "../services/tasks";
 
-interface TodoProviderValue {
-  todos: ITodo[];
+interface TaskProviderValue {
+  todos: ITask[];
   totalOutstanding: number;
-  handleAddItem: (data: ITodo) => void;
+  handleAddItem: (data: ITask) => void;
   isClearAllTodos: () => void;
   deleteItem: (id: string) => void;
-  updatedItemHandler: (data: ITodo) => void;
+  updatedItemHandler: (data: ITask) => void;
   isClearCompleted: () => void;
   handleToggleAllDone: () => void;
 }
 
-export const TodoContext = createContext({} as TodoProviderValue);
+export const TaskContext = createContext({} as TaskProviderValue);
 
 export function TodoProvider({ children }: { children: React.ReactNode }) {
-  const [todos, setTodos] = useState<ITodo[]>([]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
   const [searchParams] = useSearchParams();
   const filter = searchParams.get("todos");
 
-  const loadTodos = useCallback(async () => {
+  const loadTasks = useCallback(async () => {
     try {
-      const result = await todosService.getAll();
+      const result = await tasksService.getAll();
       const filteredTodos = applyFilter(result, filter);
-      setTodos(filteredTodos);
+      setTasks(filteredTodos);
     } catch (error) {
       alert("deu ruim parceiro!!");
     }
   }, [filter]);
 
-  function updatedItemHandler(data: ITodo) {
-    const updatedTodos = todos.map((item) => {
+  function updatedItemHandler(data: ITask) {
+    const updatedTodos = tasks.map((item) => {
       if (item.id === data.id) {
         return {
           ...item,
@@ -44,20 +44,20 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
       return item;
     });
 
-    setTodos(updatedTodos);
+    setTasks(updatedTodos);
   }
 
-  function handleAddItem(item: ITodo) {
-    setTodos([item, ...todos]);
+  function handleAddItem(item: ITask) {
+    setTasks([item, ...tasks]);
   }
 
   function isClearAllTodos() {
-    setTodos([]);
+    setTasks([]);
   }
 
   function handleToggleAllDone() {
-    return setTodos(
-      todos.map((item) => ({
+    return setTasks(
+      tasks.map((item) => ({
         ...item,
         isDone: true,
       }))
@@ -65,21 +65,21 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   }
 
   function isClearCompleted() {
-    setTodos(todos.filter((item) => item.isDone !== true));
+    setTasks(tasks.filter((item) => item.isDone !== true));
   }
 
   function deleteItem(itemId: string) {
-    setTodos(todos.filter((item) => item.id !== itemId));
+    setTasks(tasks.filter((item) => item.id !== itemId));
   }
 
-  const totalOutstanding = todos.reduce((acc, value) => {
+  const totalOutstanding = tasks.reduce((acc, value) => {
     if (!value.isDone) {
       return acc + 1;
     }
     return acc;
   }, 0);
 
-  const applyFilter = (todos: ITodo[], filter: string | null): ITodo[] => {
+  const applyFilter = (todos: ITask[], filter: string | null): ITask[] => {
     switch (filter) {
       case "active":
         return todos.filter((todo) => !todo.isDone);
@@ -91,13 +91,13 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    loadTodos();
-  }, [filter, loadTodos]);
+    loadTasks();
+  }, [filter, loadTasks]);
 
   return (
-    <TodoContext.Provider
+    <TaskContext.Provider
       value={{
-        todos,
+        todos: tasks,
         deleteItem,
         handleAddItem,
         isClearAllTodos,
@@ -108,6 +108,6 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
       }}
     >
       {children}
-    </TodoContext.Provider>
+    </TaskContext.Provider>
   );
 }

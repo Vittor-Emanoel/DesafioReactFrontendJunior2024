@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { TodoContext } from "../../contexts/TodoContext";
+import { TaskContext } from "../../contexts/TaskContext";
 import { IconContainer, InputContainer } from "./styles";
 
 interface InputProps {
@@ -9,7 +9,7 @@ interface InputProps {
 
 export function Input({ placeholder, icon }: InputProps) {
   const [value, setValue] = useState("");
-  const { handleToggleAllDone, handleAddItem } = useContext(TodoContext);
+  const { handleToggleAllDone, handleAddItem } = useContext(TaskContext);
 
   const handleChange = (event: any) => {
     setValue(event.target.value);

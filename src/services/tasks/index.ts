@@ -1,5 +1,5 @@
 import { getAll } from "./getAll";
 
-export const todosService = {
+export const tasksService = {
   getAll,
 };

@@ -1,20 +1,20 @@
 import { ComponentProps, useContext, useState } from "react";
 import Xicon from "../../assets/icons/xicon";
 
-import { TodoContext } from "../../contexts/TodoContext";
-import { ITodo } from "../../entities/Todo";
+import { TaskContext } from "../../contexts/TaskContext";
+import { ITask } from "../../entities/Task";
 import { Checkbox } from "../CheckBox";
 import { Container, DeletedTodoButton } from "./styles";
 
 interface TaskItemProps extends ComponentProps<"input"> {
-  item: ITodo;
+  item: ITask;
 }
 
 export function TaskItem({ item, ...props }: TaskItemProps) {
   const [checked, setChecked] = useState(item.isDone);
   const [isEditing, setIsEditing] = useState(false);
   const [inputTitle, setInputTitle] = useState(item.title);
-  const { deleteItem, updatedItemHandler } = useContext(TodoContext);
+  const { deleteItem, updatedItemHandler } = useContext(TaskContext);
 
   const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputTitle(event.target.value);

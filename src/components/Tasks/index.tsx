@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { TodoContext } from "../../contexts/TodoContext";
+import { TaskContext } from "../../contexts/TaskContext";
 import { TaskItem } from "../TaskItem";
 
 export function Tasks() {
-  const { todos } = useContext(TodoContext);
+  const { todos } = useContext(TaskContext);
 
   return (
     <div>

@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { TodoContext } from "../../contexts/TodoContext";
+import { TaskContext } from "../../contexts/TaskContext";
 import { FiltersButton, FooterContainer, SummaryTodos } from "./styles";
 
 export function Footer() {
-  const { isClearCompleted, totalOutstanding } = useContext(TodoContext);
+  const { isClearCompleted, totalOutstanding } = useContext(TaskContext);
   const [activeFilter, setActiveFilter] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
