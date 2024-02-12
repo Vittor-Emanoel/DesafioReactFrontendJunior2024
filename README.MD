@@ -46,6 +46,8 @@ Siga as instruções abaixo para começar:
 - Limpeza de tarefas concluídas
 - Filtragem de tarefas por "Todos", "Ativos" e "Completos"
 
+! AS MODIFICAÇÕES ESTÃO SENDO FEITAS NO ESTADO E NÃO DA "API" EM SI. ENTÃO, AO RECARREGAR A PÁGINAS AS ALTERAÇÕES NÃO SERÃO MANTIDAS!
+
 ## Tecnologias Utilizadas
 
 - React
