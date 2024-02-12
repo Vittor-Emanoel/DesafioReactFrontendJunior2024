@@ -5,6 +5,7 @@ export const InputContainer = styled.form`
   height: 65px;
   position: relative;
   display: flex;
+  z-index: 100;
 
   input {
     width: 100%;
@@ -14,7 +15,6 @@ export const InputContainer = styled.form`
     border: 0;
     font-style: italic;
     cursor: pointer;
-    z-index: 100;
 
     &::placeholder {
       color: rgba(0, 0, 0, 0.4);
@@ -28,7 +28,7 @@ export const InputContainer = styled.form`
 
 export const IconContainer = styled.div`
   position: absolute;
-  top: 15px;
+  top: 18px;
   left: 10px;
   cursor: pointer;
 

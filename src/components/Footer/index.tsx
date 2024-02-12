@@ -40,7 +40,7 @@ export function Footer() {
       <ul>
         <li>
           <FiltersButton
-            active={activeFilter === "all"}
+            $isActive={activeFilter === "all"}
             onClick={() => handleFilterTodos("all")}
           >
             All
@@ -48,7 +48,7 @@ export function Footer() {
         </li>
         <li>
           <FiltersButton
-            active={activeFilter === "active"}
+            $isActive={activeFilter === "active"}
             onClick={() => handleFilterTodos("active")}
           >
             Active
@@ -56,7 +56,7 @@ export function Footer() {
         </li>
         <li>
           <FiltersButton
-            active={activeFilter === "completed"}
+            $isActive={activeFilter === "completed"}
             onClick={() => handleFilterTodos("completed")}
           >
             Completed

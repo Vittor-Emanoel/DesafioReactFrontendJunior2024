@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface FiltersButtonProps {
-  active: boolean;
+  $isActive: boolean;
 }
 
 export const FooterContainer = styled.div`
@@ -43,7 +43,7 @@ export const FiltersButton = styled.button<FiltersButtonProps>`
   border-radius: 2px;
   transition: border ease-in 0.2s;
   border: 1px solid
-    ${(props) => (props.active ? props.theme["red"] : props.theme["white"])};
+    ${(props) => (props.$isActive ? props.theme["red"] : props.theme["white"])};
 
   &:hover {
     border: 1px solid ${(props) => props.theme["red"]};

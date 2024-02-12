@@ -11,6 +11,7 @@ interface TodoProviderValue {
   deleteItem: (id: string) => void;
   updatedItemHandler: (data: ITodo) => void;
   isClearCompleted: () => void;
+  handleToggleAllDone: () => void;
 }
 
 export const TodoContext = createContext({} as TodoProviderValue);
@@ -54,6 +55,15 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     setTodos([]);
   }
 
+  function handleToggleAllDone() {
+    setTodos(
+      todos.map((item) => ({
+        ...item,
+        isDone: true,
+      }))
+    );
+  }
+
   function isClearCompleted() {
     setTodos(todos.filter((item) => item.isDone !== true));
   }
@@ -88,12 +98,13 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     <TodoContext.Provider
       value={{
         todos,
+        deleteItem,
         handleAddItem,
         isClearAllTodos,
-        deleteItem,
-        updatedItemHandler,
         totalOutstanding,
         isClearCompleted,
+        updatedItemHandler,
+        handleToggleAllDone,
       }}
     >
       {children}

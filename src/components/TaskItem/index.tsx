@@ -4,7 +4,7 @@ import Xicon from "../../assets/icons/xicon";
 import { TodoContext } from "../../contexts/TodoContext";
 import { ITodo } from "../../entities/Todo";
 import { Checkbox } from "../CheckBox";
-import { Container, DeletedTodoButton, Text } from "./styles";
+import { Container, DeletedTodoButton } from "./styles";
 
 interface TaskItemProps extends ComponentProps<"input"> {
   title: string;
@@ -32,24 +32,22 @@ export function TaskItem({ title, isDone, item, ...props }: TaskItemProps) {
     setChecked(newChecked);
     updatedItemHandler({ id: item.id, title: inputTitle, isDone: newChecked });
   }
-
   return (
-    <Container>
+    <Container $mark={checked}>
       <div onClick={handleChange}>
         <Checkbox checked={checked} onChange={handleChange} />
       </div>
       {isEditing ? (
-        <Text
+        <input
           type="text"
-          value={inputTitle}
+          defaultValue={inputTitle}
           onChange={handleTextChange}
           autoFocus
-          checked={checked}
           {...props}
         />
       ) : (
-        <Text
-          checked={checked}
+        <input
+          type="text"
           onDoubleClick={handleDoubleClick}
           defaultValue={inputTitle}
         />

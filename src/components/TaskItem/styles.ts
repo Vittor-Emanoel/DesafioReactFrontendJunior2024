@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-interface TextProps {
-  checked: boolean;
+interface InputCustomProps {
+  $mark?: boolean;
 }
 
-export const Container = styled.div`
+export const Container = styled.div<InputCustomProps>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -20,6 +20,24 @@ export const Container = styled.div`
 
   &:hover button {
     display: block;
+  }
+
+  input {
+    font-size: 24px;
+    padding: 15px 80px 15px 60px;
+    outline: none;
+    border: none;
+    background: #fff;
+    flex: 1;
+    cursor: pointer;
+    border: 1px solid ${(props) => props.theme["border"]};
+    text-decoration: ${(props) => (props.$mark ? "line-through" : "none")};
+    color: ${(props) =>
+      props.$mark ? props.theme["completed"] : props.theme["gray-500"]};
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.4);
+    }
   }
 `;
 
@@ -40,20 +58,4 @@ export const DeletedTodoButton = styled.button`
   }
 `;
 
-export const Text = styled.input<TextProps>`
-  text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
-  color: ${(props) =>
-    props.checked ? props.theme["completed"] : props.theme["gray-500"]};
-  font-size: 24px;
-  padding: 15px 80px 15px 60px;
-  outline: none;
-  border: none;
-  background: #fff;
-  flex: 1;
-  cursor: pointer;
-  border: 1px solid ${(props) => props.theme["border"]};
-
-  &::placeholder {
-    color: rgba(0, 0, 0, 0.4);
-  }
-`;
+export const InputCustom = styled.input<InputCustomProps>``;
