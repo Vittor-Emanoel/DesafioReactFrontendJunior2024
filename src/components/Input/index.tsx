@@ -11,11 +11,11 @@ export function Input({ placeholder, icon }: InputProps) {
   const [title, setTitle] = useState("");
   const { handleToggleAllDone, handleAddItem } = useContext(TaskContext);
 
-  const handleChangeTitle = (event: any) => {
+  const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handleAddItem({
       id: Math.random().toString(),
