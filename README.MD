@@ -48,11 +48,12 @@ Siga as instruções abaixo para começar:
 
 **AS MODIFICAÇÕES ESTÃO SENDO FEITAS NO ESTADO E NÃO na "API" EM SI. ENTÃO, AO RECARREGAR A PÁGINAS AS ALTERAÇÕES NÃO SERÃO MANTIDAS!**
 
-## Tecnologias Utilizadas
+## Tecnologias Utilizadas & Padrões
 
 - React
 - TypeScript
 - Styled-components
+- Conventional-commits
 
 ## Autor
 
