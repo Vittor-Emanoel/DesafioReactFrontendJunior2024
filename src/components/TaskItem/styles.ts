@@ -6,22 +6,11 @@ interface TextProps {
 
 export const Container = styled.div`
   width: 100%;
-  height: 65px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
 
-  p {
-    width: 100%;
-    height: 65px;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    padding: 15px 15px 15px 60px;
-    font-size: 24px;
-    border-top: 1px solid ${(props) => props.theme["border"]};
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
 
   input {
     font-size: 24px;
@@ -31,14 +20,10 @@ export const Container = styled.div`
     background: #fff;
     flex: 1;
     cursor: pointer;
-    border-top: 1px solid ${(props) => props.theme["border"]};
+    border: 1px solid ${(props) => props.theme["border"]};
 
     &::placeholder {
       color: rgba(0, 0, 0, 0.4);
-    }
-
-    &:focus {
-      box-shadow: 0 0 2px 2px #cf7d7d;
     }
   }
 
@@ -71,7 +56,7 @@ export const DeletedTodoButton = styled.button`
   }
 `;
 
-export const Text = styled.p<TextProps>`
+export const Text = styled.input<TextProps>`
   text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
   color: ${(props) =>
     props.checked ? props.theme["completed"] : props.theme["gray-500"]};

@@ -6,16 +6,16 @@ import { ITodo } from "../../entities/Todo";
 import { Checkbox } from "../CheckBox";
 import { Container, DeletedTodoButton, Text } from "./styles";
 
-interface TodoItemProps extends ComponentProps<"input"> {
+interface TaskItemProps extends ComponentProps<"input"> {
   title: string;
   isDone: boolean;
   item: ITodo;
 }
 
-export function TodoItem({ title, isDone, item, ...props }: TodoItemProps) {
+export function TaskItem({ title, isDone, item, ...props }: TaskItemProps) {
   const [checked, setChecked] = useState(isDone);
   const [isEditing, setIsEditing] = useState(false);
-  const [text, setText] = useState(title);
+  const [inputTitle, setInputTitle] = useState(title);
   const { deleteItem, updatedItemHandler } = useContext(TodoContext);
 
   const handleDoubleClick = () => {
@@ -23,14 +23,14 @@ export function TodoItem({ title, isDone, item, ...props }: TodoItemProps) {
   };
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setText(event.target.value);
-    updatedItemHandler({ id: item.id, title: text, isDone: checked });
+    setInputTitle(event.target.value);
+    updatedItemHandler({ id: item.id, title: inputTitle, isDone: checked });
   };
 
   function handleChange() {
     const newChecked = !checked;
     setChecked(newChecked);
-    updatedItemHandler({ id: item.id, title: text, isDone: newChecked });
+    updatedItemHandler({ id: item.id, title: inputTitle, isDone: newChecked });
   }
 
   return (
@@ -39,17 +39,20 @@ export function TodoItem({ title, isDone, item, ...props }: TodoItemProps) {
         <Checkbox checked={checked} onChange={handleChange} />
       </div>
       {isEditing ? (
-        <input
+        <Text
           type="text"
-          value={text}
+          value={inputTitle}
           onChange={handleTextChange}
           autoFocus
+          checked={checked}
           {...props}
         />
       ) : (
-        <Text checked={checked} onDoubleClick={handleDoubleClick}>
-          {title}
-        </Text>
+        <Text
+          checked={checked}
+          onDoubleClick={handleDoubleClick}
+          defaultValue={inputTitle}
+        />
       )}
       <DeletedTodoButton onClick={() => deleteItem(item.id)}>
         <Xicon />

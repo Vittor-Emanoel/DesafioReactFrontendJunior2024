@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import { TodoContext } from "../../contexts/TodoContext";
-import { TodoItem } from "../TodoItem";
+import { TaskItem } from "../TaskItem";
 
-export function Todos() {
+export function Tasks() {
   const { todos } = useContext(TodoContext);
 
   return (
     <div>
       {todos.map((item) => (
         <div key={item.id!}>
-          <TodoItem title={item.title} isDone={item.isDone} item={item} />
+          <TaskItem title={item.title} isDone={item.isDone} item={item} />
         </div>
       ))}
     </div>
