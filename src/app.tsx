@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "styled-components";
 import { TodoProvider } from "./contexts/TaskContext";
 import { Home } from "./pages/home";
@@ -10,6 +11,7 @@ export function App() {
       <TodoProvider>
         <Home />
         <GlobalStyle />
+        <Toaster />
       </TodoProvider>
     </ThemeProvider>
   );

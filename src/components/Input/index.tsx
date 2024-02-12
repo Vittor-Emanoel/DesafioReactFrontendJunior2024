@@ -8,27 +8,31 @@ interface InputProps {
 }
 
 export function Input({ placeholder, icon }: InputProps) {
-  const [value, setValue] = useState("");
+  const [title, setTitle] = useState("");
   const { handleToggleAllDone, handleAddItem } = useContext(TaskContext);
 
-  const handleChange = (event: any) => {
-    setValue(event.target.value);
+  const handleChangeTitle = (event: any) => {
+    setTitle(event.target.value);
   };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
     handleAddItem({
       id: Math.random().toString(),
-      title: value,
+      title,
       isDone: false,
     });
-    setValue("");
+    setTitle("");
   };
 
   return (
     <InputContainer onSubmit={handleSubmit}>
       <IconContainer onClick={handleToggleAllDone}>{icon}</IconContainer>
-      <input value={value} onChange={handleChange} placeholder={placeholder} />
+      <input
+        value={title}
+        onChange={handleChangeTitle}
+        placeholder={placeholder}
+      />
     </InputContainer>
   );
 }

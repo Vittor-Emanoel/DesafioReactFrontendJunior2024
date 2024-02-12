@@ -1,8 +1,8 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
 import { ITask } from "../entities/Task";
 import { tasksService } from "../services/tasks";
-
 interface TaskProviderValue {
   todos: ITask[];
   totalOutstanding: number;
@@ -27,7 +27,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
       const filteredTodos = applyFilter(result, filter);
       setTasks(filteredTodos);
     } catch (error) {
-      alert("deu ruim parceiro!!");
+      toast.error("Deu ruim parceiro!!");
     }
   }, [filter]);
 
