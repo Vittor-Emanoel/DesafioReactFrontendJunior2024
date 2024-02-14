@@ -33,9 +33,11 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
 
   return (
     <Container $mark={item.isDone}>
-      <div onClick={handleChecked}>
-        <Checkbox checked={item.isDone} onChange={handleChecked} />
-      </div>
+      {!isEditing && (
+        <div onClick={handleChecked}>
+          <Checkbox checked={item.isDone} onChange={handleChecked} />
+        </div>
+      )}
       {isEditing ? (
         <input
           type="text"
