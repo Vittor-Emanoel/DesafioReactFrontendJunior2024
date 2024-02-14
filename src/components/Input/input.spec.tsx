@@ -19,7 +19,7 @@ describe("Input Component", () => {
           tasks: [],
           totalOutstanding: 0,
           handleAddItem: handleAddItemMock,
-          isClearAllTodos: jest.fn(),
+          isClearAllTasks: jest.fn(),
           deleteItem: jest.fn(),
           updatedItemHandler: jest.fn(),
           isClearCompleted: jest.fn(),

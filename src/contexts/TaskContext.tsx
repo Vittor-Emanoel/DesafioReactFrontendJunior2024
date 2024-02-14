@@ -8,7 +8,6 @@ interface TaskProviderValue {
   tasks: ITask[];
   totalOutstanding: number;
   handleAddItem: (data: ITask) => void;
-  isClearAllTodos: () => void;
   deleteItem: (id: string) => void;
   updatedItemHandler: (data: ITask) => void;
   isClearCompleted: () => void;
@@ -54,10 +53,6 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
 
   function handleAddItem(item: ITask) {
     setTasks([item, ...tasks]);
-  }
-
-  function isClearAllTodos() {
-    setTasks([]);
   }
 
   function handleToggleAllDone() {
@@ -109,7 +104,6 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
         tasks,
         deleteItem,
         handleAddItem,
-        isClearAllTodos,
         totalOutstanding,
         isClearCompleted,
         updatedItemHandler,
