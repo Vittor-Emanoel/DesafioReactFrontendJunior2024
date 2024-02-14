@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { ComponentProps, useContext, useState } from "react";
 import { TaskContext } from "../../contexts/TaskContext";
 import { IconContainer, InputContainer } from "./styles";
 
-interface InputProps {
+interface InputProps extends ComponentProps<"input"> {
   icon?: React.ReactNode;
   placeholder: string;
 }
