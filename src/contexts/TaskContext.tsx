@@ -1,10 +1,11 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
+import { Loader } from "../components/Loader";
 import { ITask } from "../entities/Task";
 import { tasksService } from "../services/tasks";
 interface TaskProviderValue {
-  todos: ITask[];
+  tasks: ITask[];
   totalOutstanding: number;
   handleAddItem: (data: ITask) => void;
   isClearAllTodos: () => void;
@@ -18,16 +19,20 @@ export const TaskContext = createContext({} as TaskProviderValue);
 
 export function TodoProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<ITask[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchParams] = useSearchParams();
   const filter = searchParams.get("todos");
 
   const loadTasks = useCallback(async () => {
     try {
+      setIsLoading(true);
       const result = await tasksService.getAll();
       const filteredTodos = applyFilter(result, filter);
       setTasks(filteredTodos);
     } catch (error) {
       toast.error("Deu ruim parceiro!!");
+    } finally {
+      setIsLoading(false);
     }
   }, [filter]);
 
@@ -94,10 +99,14 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     loadTasks();
   }, [filter, loadTasks]);
 
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
+
   return (
     <TaskContext.Provider
       value={{
-        todos: tasks,
+        tasks,
         deleteItem,
         handleAddItem,
         isClearAllTodos,

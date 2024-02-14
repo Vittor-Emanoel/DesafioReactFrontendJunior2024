@@ -3,13 +3,13 @@ import { TaskContext } from "../../contexts/TaskContext";
 import { TaskItem } from "../TaskItem";
 
 export function Tasks() {
-  const { todos } = useContext(TaskContext);
+  const { tasks } = useContext(TaskContext);
 
   return (
     <div>
-      {todos.map((item) => (
-        <div key={item.id!}>
-          <TaskItem item={item} />
+      {tasks.map((task) => (
+        <div key={task.id!}>
+          <TaskItem item={task} />
         </div>
       ))}
     </div>

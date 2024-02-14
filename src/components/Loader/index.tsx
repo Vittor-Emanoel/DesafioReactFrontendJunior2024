@@ -1,4 +1,5 @@
 import ReactPortal from "../ReactPortal";
+import Spinner from "../Spinner";
 import { Overlay } from "./styles";
 
 interface LoaderProps {
@@ -12,7 +13,9 @@ export function Loader({ isLoading }: LoaderProps) {
 
   return (
     <ReactPortal containerId="loader-root">
-      <Overlay></Overlay>
+      <Overlay>
+        <Spinner size={64} />
+      </Overlay>
     </ReactPortal>
   );
 }
