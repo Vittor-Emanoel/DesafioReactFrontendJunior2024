@@ -27,7 +27,9 @@ export function Input({ placeholder, icon }: InputProps) {
 
   return (
     <InputContainer onSubmit={handleSubmit}>
-      <IconContainer onClick={handleToggleAllDone}>{icon}</IconContainer>
+      {icon && (
+        <IconContainer onClick={handleToggleAllDone}>{icon}</IconContainer>
+      )}
       <input
         value={title}
         onChange={handleChangeTitle}

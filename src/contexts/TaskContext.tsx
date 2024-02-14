@@ -84,14 +84,14 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     return acc;
   }, 0);
 
-  const applyFilter = (todos: ITask[], filter: string | null): ITask[] => {
+  const applyFilter = (tasks: ITask[], filter: string | null): ITask[] => {
     switch (filter) {
       case "active":
-        return todos.filter((todo) => !todo.isDone);
+        return tasks.filter((todo) => !todo.isDone);
       case "completed":
-        return todos.filter((todo) => todo.isDone);
+        return tasks.filter((todo) => todo.isDone);
       default:
-        return todos;
+        return tasks;
     }
   };
 
