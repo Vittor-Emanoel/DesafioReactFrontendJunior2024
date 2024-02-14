@@ -4,13 +4,13 @@ import { TaskContext } from "../../contexts/TaskContext";
 
 describe("Input Component", () => {
   it("should render correctly with placeholder", () => {
-    const { getByPlaceholderText } = render(
-      <Input placeholder="What needs to be done?" />
-    );
-    expect(getByPlaceholderText("What needs to be done?")).toBeInTheDocument();
+    render(<Input placeholder="What needs to be done?" />);
+    expect(
+      screen.getByPlaceholderText("What needs to be done?")
+    ).toBeInTheDocument();
   });
 
-  it("should called handleAddItem function when form is submitted", () => {
+  it("should call handleAddItem function when form is submitted", () => {
     const handleAddItemMock = jest.fn();
 
     render(
@@ -33,7 +33,7 @@ describe("Input Component", () => {
     const inputElement = screen.getByPlaceholderText("What needs to be done?");
     fireEvent.change(inputElement, { target: { value: "trabalhar" } });
 
-    fireEvent.submit(screen.getByPlaceholderText("What needs to be done?"));
+    fireEvent.submit(inputElement);
 
     expect(handleAddItemMock).toHaveBeenCalledWith({
       id: expect.any(String),
@@ -41,4 +41,5 @@ describe("Input Component", () => {
       title: "trabalhar",
     });
   });
+  it("should called handleToggleAllDone function when iconContainer is clicked", () => {});
 });

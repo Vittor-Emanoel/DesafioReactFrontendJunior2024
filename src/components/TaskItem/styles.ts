@@ -30,6 +30,7 @@ export const Container = styled.div<InputCustomProps>`
     background: #fff;
     flex: 1;
     cursor: pointer;
+    width: 100%;
     border: 1px solid ${(props) => props.theme["border"]};
     text-decoration: ${(props) => (props.$mark ? "line-through" : "none")};
     color: ${(props) =>
