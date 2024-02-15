@@ -38,16 +38,6 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     loadTasks();
   }, [loadTasks]);
 
-  // const filteredTasks = filter
-  //   ? tasks.filter((task) =>
-  //       filter === "active"
-  //         ? !task.isDone
-  //         : filter === "completed"
-  //         ? task.isDone
-  //         : true
-  //     )
-  //   : tasks;
-
   const filteredTasks = () => {
     switch (filter) {
       case "active":
@@ -80,12 +70,13 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   }
 
   function handleToggleAllDone() {
-    return setTasks(
-      tasks.map((item) => ({
-        ...item,
-        isDone: true,
-      }))
-    );
+    const allTasksAreDone = tasks.every((task) => task.isDone);
+    const updatedTasks = tasks.map((task) => ({
+      ...task,
+      isDone: !allTasksAreDone,
+    }));
+
+    setTasks(updatedTasks);
   }
 
   function isClearCompleted() {
