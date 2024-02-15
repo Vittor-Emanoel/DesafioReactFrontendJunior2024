@@ -36,7 +36,7 @@ Siga as instruções abaixo para começar:
 ## Funcionalidades Implementadas
 
 - Recuperação das tarefas iniciais via GET da [API](https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos)
-- Adição de novas tarefas
+- Adição de novas tarefas (Só adiciona tarefas apartir de 2 letras)
 - Listagem das tarefas
 - Marcação e desmarcação de tarefas como concluídas
 - Remoção de tarefas
