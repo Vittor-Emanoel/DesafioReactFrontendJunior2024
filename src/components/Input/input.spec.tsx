@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Input } from ".";
+import { XIcon } from "../../assets/icons/xicon";
 import { TaskContext } from "../../contexts/TaskContext";
+import { IconContainer } from "./styles";
 
 describe("Input Component", () => {
   it("should render correctly with placeholder", () => {
@@ -19,8 +21,7 @@ describe("Input Component", () => {
           tasks: [],
           totalOutstanding: 0,
           handleAddItem: handleAddItemMock,
-          isClearAllTasks: jest.fn(),
-          deleteItem: jest.fn(),
+          deleteTasks: jest.fn(),
           updatedItemHandler: jest.fn(),
           isClearCompleted: jest.fn(),
           handleToggleAllDone: jest.fn(),
@@ -41,5 +42,33 @@ describe("Input Component", () => {
       title: "trabalhar",
     });
   });
-  it("should called handleToggleAllDone function when iconContainer is clicked", () => {});
+
+  test("should call handleToggleAllDone function when iconContainer is clicked", () => {
+    const handleToggleAllDoneMock = jest.fn();
+
+    render(
+      <TaskContext.Provider
+        value={{
+          tasks: [],
+          totalOutstanding: 0,
+          handleAddItem: jest.fn(),
+          deleteTasks: jest.fn(),
+          updatedItemHandler: jest.fn(),
+          isClearCompleted: jest.fn(),
+          handleToggleAllDone: handleToggleAllDoneMock,
+        }}
+      >
+        <IconContainer
+          data-testid="icon-container"
+          onClick={handleToggleAllDoneMock}
+        >
+          {<XIcon size={32} />}
+        </IconContainer>
+      </TaskContext.Provider>
+    );
+    const iconContainer = screen.getByTestId("icon-container");
+    fireEvent.click(iconContainer);
+
+    expect(handleToggleAllDoneMock).toHaveBeenCalled();
+  });
 });

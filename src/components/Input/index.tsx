@@ -31,7 +31,7 @@ export function Input({ placeholder, icon }: InputProps) {
   return (
     <InputContainer onSubmit={handleSubmit}>
       {icon && (
-        <IconContainer onClick={handleToggleAllDone}>{icon}</IconContainer>
+        <IconContainer data-testid="icon-container" onClick={handleToggleAllDone}>{icon}</IconContainer>
       )}
       <input
         value={title}
