@@ -4,11 +4,12 @@ import { useSearchParams } from "react-router-dom";
 import { Loader } from "../components/Loader";
 import { ITask } from "../entities/Task";
 import { tasksService } from "../services/tasks";
+
 interface TaskProviderValue {
   tasks: ITask[];
   totalOutstanding: number;
   handleAddItem: (data: ITask) => void;
-  deleteItem: (id: string) => void;
+  deleteTaks: (id: string) => void;
   updatedItemHandler: (data: ITask) => void;
   isClearCompleted: () => void;
   handleToggleAllDone: () => void;
@@ -16,7 +17,7 @@ interface TaskProviderValue {
 
 export const TaskContext = createContext({} as TaskProviderValue);
 
-export function TodoProvider({ children }: { children: React.ReactNode }) {
+export function TaskProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams] = useSearchParams();
@@ -49,24 +50,24 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  function updatedItemHandler(data: ITask) {
-    const updatedTodos = tasks.map((item) => {
-      if (item.id === data.id) {
+  function updatedItemHandler({ id, title, isDone }: ITask) {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === id) {
         return {
-          ...item,
-          title: data.title,
-          isDone: data.isDone,
+          ...task,
+          title: title,
+          isDone: isDone,
         };
       }
 
-      return item;
+      return task;
     });
 
-    setTasks(updatedTodos);
+    setTasks(updatedTasks);
   }
 
-  function handleAddItem(item: ITask) {
-    setTasks([item, ...tasks]);
+  function handleAddItem(task: ITask) {
+    setTasks([task, ...tasks]);
   }
 
   function handleToggleAllDone() {
@@ -83,8 +84,8 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     setTasks(tasks.filter((item) => item.isDone !== true));
   }
 
-  function deleteItem(itemId: string) {
-    setTasks(tasks.filter((item) => item.id !== itemId));
+  function deleteTaks(taskId: string) {
+    setTasks(tasks.filter((task) => task.id !== taskId));
   }
 
   const totalOutstanding = tasks.reduce((acc, value) => {
@@ -102,7 +103,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     <TaskContext.Provider
       value={{
         tasks: filteredTasks(),
-        deleteItem,
+        deleteTaks,
         handleAddItem,
         totalOutstanding,
         isClearCompleted,

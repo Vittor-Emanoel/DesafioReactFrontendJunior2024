@@ -4,7 +4,7 @@ import Xicon from "../../assets/icons/xicon";
 import { TaskContext } from "../../contexts/TaskContext";
 import { ITask } from "../../entities/Task";
 import { Checkbox } from "../CheckBox";
-import { Container, DeletedTodoButton } from "./styles";
+import { Container, DeletedTaskButton } from "./styles";
 
 interface TaskItemProps extends ComponentProps<"input"> {
   item: ITask;
@@ -14,7 +14,7 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
   const [checked, setChecked] = useState(item.isDone);
   const [isEditing, setIsEditing] = useState(false);
   const [inputTitle, setInputTitle] = useState(item.title);
-  const { deleteItem, updatedItemHandler } = useContext(TaskContext);
+  const { deleteTaks, updatedItemHandler } = useContext(TaskContext);
 
   const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputTitle(event.target.value);
@@ -53,9 +53,9 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
           defaultValue={inputTitle}
         />
       )}
-      <DeletedTodoButton onClick={() => deleteItem(item.id)}>
+      <DeletedTaskButton onClick={() => deleteTaks(item.id)}>
         <Xicon />
-      </DeletedTodoButton>
+      </DeletedTaskButton>
     </Container>
   );
 }

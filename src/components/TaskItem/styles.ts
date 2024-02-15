@@ -42,7 +42,7 @@ export const Container = styled.div<InputCustomProps>`
   }
 `;
 
-export const DeletedTodoButton = styled.button`
+export const DeletedTaskButton = styled.button`
   width: 50px;
   position: absolute;
   right: 10px;
