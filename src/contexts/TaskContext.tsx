@@ -26,14 +26,38 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     try {
       setIsLoading(true);
       const result = await tasksService.getAll();
-      const filteredTodos = applyFilter(result, filter);
-      setTasks(filteredTodos);
+      setTasks(result);
     } catch (error) {
       toast.error("Deu ruim parceiro!!");
     } finally {
       setIsLoading(false);
     }
-  }, [filter]);
+  }, []);
+
+  useEffect(() => {
+    loadTasks();
+  }, [loadTasks]);
+
+  // const filteredTasks = filter
+  //   ? tasks.filter((task) =>
+  //       filter === "active"
+  //         ? !task.isDone
+  //         : filter === "completed"
+  //         ? task.isDone
+  //         : true
+  //     )
+  //   : tasks;
+
+  const filteredTasks = () => {
+    switch (filter) {
+      case "active":
+        return tasks.filter((task) => !task.isDone);
+      case "completed":
+        return tasks.filter((tasks) => tasks.isDone);
+      default:
+        return tasks;
+    }
+  };
 
   function updatedItemHandler(data: ITask) {
     const updatedTodos = tasks.map((item) => {
@@ -79,21 +103,6 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     return acc;
   }, 0);
 
-  const applyFilter = (tasks: ITask[], filter: string | null): ITask[] => {
-    switch (filter) {
-      case "active":
-        return tasks.filter((todo) => !todo.isDone);
-      case "completed":
-        return tasks.filter((todo) => todo.isDone);
-      default:
-        return tasks;
-    }
-  };
-
-  useEffect(() => {
-    loadTasks();
-  }, [filter, loadTasks]);
-
   if (isLoading) {
     return <Loader isLoading={isLoading} />;
   }
@@ -101,7 +110,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   return (
     <TaskContext.Provider
       value={{
-        tasks,
+        tasks: filteredTasks(),
         deleteItem,
         handleAddItem,
         totalOutstanding,
