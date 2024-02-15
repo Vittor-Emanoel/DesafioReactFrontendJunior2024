@@ -22,7 +22,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:server": "npx json-server --port 3001 db.json",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject"

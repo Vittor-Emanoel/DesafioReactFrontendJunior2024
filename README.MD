@@ -54,6 +54,7 @@ Siga as instruções abaixo para começar:
 - TypeScript
 - Styled-components
 - Conventional-commits
+- React Testing library & Jest
 
 ## Autor
 

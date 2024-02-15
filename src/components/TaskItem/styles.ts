@@ -51,7 +51,8 @@ export const DeletedTaskButton = styled.button`
 
   svg {
     color: rgba(0, 0, 0, 0.4);
-    &::hover {
+
+    &:hover {
       transition: colors 0.2s ease;
       color: ${({ theme }) => theme.red};
     }
