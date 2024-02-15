@@ -1,6 +1,6 @@
 import { ComponentProps, useContext, useState } from "react";
-import Xicon from "../../assets/icons/xicon";
 
+import { XIcon } from "../../assets/icons/xicon";
 import { TaskContext } from "../../contexts/TaskContext";
 import { ITask } from "../../entities/Task";
 import { Checkbox } from "../CheckBox";
@@ -54,7 +54,7 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
         />
       )}
       <DeletedTaskButton onClick={() => deleteTaks(item.id)}>
-        <Xicon />
+        <XIcon size={24} />
       </DeletedTaskButton>
     </Container>
   );

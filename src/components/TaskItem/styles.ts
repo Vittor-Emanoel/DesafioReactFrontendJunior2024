@@ -31,7 +31,7 @@ export const Container = styled.div<InputCustomProps>`
     flex: 1;
     cursor: pointer;
     width: 100%;
-    border: 1px solid ${(props) => props.theme["border"]};
+    border: 1px solid ${({ theme }) => theme["border"]};
     text-decoration: ${(props) => (props.$mark ? "line-through" : "none")};
     color: ${(props) =>
       props.$mark ? props.theme["completed"] : props.theme["gray-500"]};
@@ -51,12 +51,9 @@ export const DeletedTaskButton = styled.button`
 
   svg {
     color: rgba(0, 0, 0, 0.4);
-
-    &:hover {
-      transition: colors 0.6s ease-out;
-      color: rgba(0, 0, 0, 1);
+    &::hover {
+      transition: colors 0.2s ease;
+      color: ${({ theme }) => theme.red};
     }
   }
 `;
-
-export const InputCustom = styled.input<InputCustomProps>``;

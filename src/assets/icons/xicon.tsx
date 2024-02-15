@@ -1,9 +1,13 @@
-function Xicon() {
+interface XIconProps {
+  size: number;
+}
+
+export function XIcon({ size }: XIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={32}
-      height={32}
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -16,5 +20,3 @@ function Xicon() {
     </svg>
   );
 }
-
-export default Xicon;
