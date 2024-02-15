@@ -9,8 +9,8 @@ export const InputContainer = styled.form`
 
   input {
     width: 100%;
-    padding: 15px 15px 15px 60px;
-    font-size: 24px;
+    padding: 0.938rem 0.938rem 0.938rem 3.125rem;
+    font-size: 1.5rem;
     outline: none;
     border: 0;
     font-style: italic;

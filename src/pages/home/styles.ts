@@ -13,7 +13,7 @@ export const Container = styled.section`
 export const PresentationContainer = styled.div`
   text-align: center;
   color: ${({ theme }) => theme["gray-500"]};
-  padding: 32px;
+  padding: 2rem;
 
   a {
     text-decoration: none;

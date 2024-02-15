@@ -17,24 +17,23 @@ export const Icon = styled.svg`
 export const HiddenCheckbox = styled.input.attrs({
   type: "checkbox",
 })<CheckboxProps>`
+  width: 100px;
+  height: 100px;
   border: 0;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
-  height: 100px;
   margin: -1px;
   overflow: hidden;
   padding: 0;
   position: absolute;
   white-space: nowrap;
-  width: 100px;
 `;
 
 export const StyledCheckbox = styled.div<CheckboxProps>`
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 1.875rem;
+  height: 1.875rem;
   border-radius: 50%;
-  transition: all 150ms;
   border: 1px solid
     ${(props) => (props.checked ? "green" : props.theme["gray-400"])};
   cursor: pointer;

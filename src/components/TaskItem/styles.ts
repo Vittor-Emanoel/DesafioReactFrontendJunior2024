@@ -23,14 +23,14 @@ export const Container = styled.div<InputCustomProps>`
   }
 
   input {
-    font-size: 24px;
-    padding: 15px 80px 15px 60px;
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 0.938rem 5rem 0.938rem 3.75rem;
     outline: none;
     border: none;
     background: #fff;
     flex: 1;
     cursor: pointer;
-    width: 100%;
     border: 1px solid ${({ theme }) => theme["border"]};
     text-decoration: ${(props) => (props.$mark ? "line-through" : "none")};
     color: ${(props) =>

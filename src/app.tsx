@@ -11,7 +11,6 @@ export function App() {
       <TaskProvider>
         <Home />
         <GlobalStyle />
-
         <Toaster />
       </TaskProvider>
     </ThemeProvider>
