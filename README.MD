@@ -66,3 +66,7 @@ mas como a ideia é sempre manter as todos da api, não faz muito sentido utiliz
 ## Autor
 
 Vittor Emanoel - [Meu GitHub](https://github.com/Vittor-Emanoel)
+
+Desenvolvido com muito esforço e empenho!
+
+"O sucesso é o encontro do preparo com a oportunidade" - Autor desconhecido
