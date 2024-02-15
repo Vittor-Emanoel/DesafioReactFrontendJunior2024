@@ -9,7 +9,7 @@ interface TaskProviderValue {
   tasks: ITask[];
   totalOutstanding: number;
   handleAddItem: (data: ITask) => void;
-  deleteTaks: (id: string) => void;
+  deleteTasks: (id: string) => void;
   updatedItemHandler: (data: ITask) => void;
   isClearCompleted: () => void;
   handleToggleAllDone: () => void;
@@ -84,7 +84,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     setTasks(tasks.filter((item) => item.isDone !== true));
   }
 
-  function deleteTaks(taskId: string) {
+  function deleteTasks(taskId: string) {
     setTasks(tasks.filter((task) => task.id !== taskId));
   }
 
@@ -103,7 +103,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     <TaskContext.Provider
       value={{
         tasks: filteredTasks(),
-        deleteTaks,
+        deleteTasks,
         handleAddItem,
         totalOutstanding,
         isClearCompleted,

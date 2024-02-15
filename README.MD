@@ -46,7 +46,14 @@ Siga as instruções abaixo para começar:
 - Limpeza de tarefas concluídas
 - Filtragem de tarefas por "Todos", "Ativos" e "Completos"
 
-**AS MODIFICAÇÕES ESTÃO SENDO FEITAS NO ESTADO E NÃO na "API" EM SI. ENTÃO, AO RECARREGAR A PÁGINAS AS ALTERAÇÕES NÃO SERÃO MANTIDAS!**
+_as modificações estão sendo feitas no estado e não da 'api' em si. Então, ao recarregar a página as alterações não serão mantidas!_
+
+ps: eu tenho duas formas rápidas para manter as todos salvas:
+
+- 1 Local Storage
+- 2 Json Server
+
+mas como a ideia é sempre manter as todos da api, não faz muito sentido utilizar desses recursos.
 
 ## Tecnologias Utilizadas & Padrões
 
@@ -59,7 +66,3 @@ Siga as instruções abaixo para começar:
 ## Autor
 
 Vittor Emanoel - [Meu GitHub](https://github.com/Vittor-Emanoel)
-
-## Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE).

@@ -14,7 +14,7 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
   const [checked, setChecked] = useState(item.isDone);
   const [isEditing, setIsEditing] = useState(false);
   const [inputTitle, setInputTitle] = useState(item.title);
-  const { deleteTaks, updatedItemHandler } = useContext(TaskContext);
+  const { deleteTasks, updatedItemHandler } = useContext(TaskContext);
 
   const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputTitle(event.target.value);
@@ -53,7 +53,7 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
           defaultValue={inputTitle}
         />
       )}
-      <DeletedTaskButton onClick={() => deleteTaks(item.id)}>
+      <DeletedTaskButton onClick={() => deleteTasks(item.id)}>
         <XIcon size={24} />
       </DeletedTaskButton>
     </Container>
