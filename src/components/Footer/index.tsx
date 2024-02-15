@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { TaskContext } from "../../contexts/TaskContext";
+import { FilterType } from "../../types/filterType";
 import { FiltersButton, FooterContainer, SummaryTodos } from "./styles";
 
 export function Footer() {
@@ -8,24 +9,29 @@ export function Footer() {
   const [activeFilter, setActiveFilter] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
-    const todosParam = searchParams.get("todos");
-    if (todosParam) {
-      setActiveFilter(todosParam);
-    }
-  }, [searchParams]);
+  const handleFilterTasks = useCallback(
+    (param: FilterType) => {
+      setSearchParams((state) => {
+        if (param) {
+          state.set("todos", param);
+        } else {
+          state.delete("todos");
+        }
+        return state;
+      });
+      setActiveFilter(param);
+    },
+    [setSearchParams, setActiveFilter]
+  );
 
-  function handleFilterTodos(param: "all" | "active" | "completed") {
-    setSearchParams((state) => {
-      if (param) {
-        state.set("todos", param);
-      } else {
-        state.delete("todos");
-      }
-      return state;
-    });
-    setActiveFilter(param);
-  }
+  useEffect(() => {
+    const params = searchParams.get("todos");
+    if (!params) {
+      handleFilterTasks("all");
+    } else {
+      setActiveFilter(params);
+    }
+  }, [searchParams, handleFilterTasks]);
 
   return (
     <FooterContainer>
@@ -41,7 +47,7 @@ export function Footer() {
         <li>
           <FiltersButton
             $isActive={activeFilter === "all"}
-            onClick={() => handleFilterTodos("all")}
+            onClick={() => handleFilterTasks("all")}
           >
             All
           </FiltersButton>
@@ -49,7 +55,7 @@ export function Footer() {
         <li>
           <FiltersButton
             $isActive={activeFilter === "active"}
-            onClick={() => handleFilterTodos("active")}
+            onClick={() => handleFilterTasks("active")}
           >
             Active
           </FiltersButton>
@@ -57,7 +63,7 @@ export function Footer() {
         <li>
           <FiltersButton
             $isActive={activeFilter === "completed"}
-            onClick={() => handleFilterTodos("completed")}
+            onClick={() => handleFilterTasks("completed")}
           >
             Completed
           </FiltersButton>
