@@ -17,12 +17,15 @@ export function Input({ placeholder, icon }: InputProps) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    handleAddItem({
-      id: Math.random().toString(),
-      title,
-      isDone: false,
-    });
-    setTitle("");
+
+    if (title.length > 1) {
+      handleAddItem({
+        id: Math.random().toString(),
+        title,
+        isDone: false,
+      });
+      setTitle("");
+    }
   };
 
   return (
