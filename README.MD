@@ -63,6 +63,8 @@ mas como a ideia é sempre manter as todos da api, não faz muito sentido utiliz
 - Conventional-commits
 - React Testing library & Jest
 
+-Por que não utilzei o Tailwind? pelo desafio de replicar a ui do TodoMVC sem nenhum atalho css que o taiwind trás. As vezes nos apegamos as libs e nos esquemos das bases *-*_ 
+
 ## Autor
 
 Vittor Emanoel - [Meu GitHub](https://github.com/Vittor-Emanoel)
