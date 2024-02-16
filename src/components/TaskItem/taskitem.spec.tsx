@@ -1,0 +1,23 @@
+import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { Checkbox } from "../CheckBox";
+
+describe("Task Item component", () => {
+  it("should check chebox", () => {
+    const handleCheckedMock = jest.fn();
+
+    const wrapper = render(
+      <div onClick={handleCheckedMock} data-testid="div-checkbox">
+        <Checkbox checked onChange={handleCheckedMock} />
+      </div>
+    );
+
+    const container = wrapper.getByTestId("div-checkbox");
+
+    userEvent.click(container);
+
+    const checkbox = wrapper.getByRole("checkbox");
+
+    expect(checkbox).toBeChecked();
+  });
+});
