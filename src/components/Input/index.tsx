@@ -1,13 +1,13 @@
 import React, { ComponentProps, useContext, useState } from "react";
+import { ChevronIcon } from "../../assets/icons/chevron";
 import { TaskContext } from "../../contexts/TaskContext";
 import { IconContainer, InputContainer } from "./styles";
 
 interface InputProps extends ComponentProps<"input"> {
-  icon?: React.ReactNode;
   placeholder: string;
 }
 
-export function Input({ placeholder, icon }: InputProps) {
+export function Input({ placeholder }: InputProps) {
   const [title, setTitle] = useState("");
   const { handleToggleAllDone, handleAddItem } = useContext(TaskContext);
 
@@ -30,9 +30,9 @@ export function Input({ placeholder, icon }: InputProps) {
 
   return (
     <InputContainer onSubmit={handleSubmit}>
-      {icon && (
-        <IconContainer data-testid="icon-container" onClick={handleToggleAllDone}>{icon}</IconContainer>
-      )}
+      <IconContainer data-testid="icon-container" onClick={handleToggleAllDone}>
+        <ChevronIcon />
+      </IconContainer>
       <input
         value={title}
         onChange={handleChangeTitle}

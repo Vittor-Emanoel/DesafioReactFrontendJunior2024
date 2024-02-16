@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Input } from ".";
-import { XIcon } from "../../assets/icons/xicon";
+import { ChevronIcon } from "../../assets/icons/chevron";
 import { TaskContext } from "../../contexts/TaskContext";
 import { IconContainer } from "./styles";
 
@@ -62,11 +62,12 @@ describe("Input Component", () => {
           data-testid="icon-container"
           onClick={handleToggleAllDoneMock}
         >
-          {<XIcon size={32} />}
+          {<ChevronIcon />}
         </IconContainer>
       </TaskContext.Provider>
     );
     const iconContainer = screen.getByTestId("icon-container");
+
     fireEvent.click(iconContainer);
 
     expect(handleToggleAllDoneMock).toHaveBeenCalled();
