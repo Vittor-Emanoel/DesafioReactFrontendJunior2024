@@ -53,7 +53,10 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
           defaultValue={inputTitle}
         />
       )}
-      <DeletedTaskButton onClick={() => deleteTasks(item.id)}>
+      <DeletedTaskButton
+        onClick={() => deleteTasks(item.id)}
+        data-testid="delete-button"
+      >
         <XIcon size={24} />
       </DeletedTaskButton>
     </Container>

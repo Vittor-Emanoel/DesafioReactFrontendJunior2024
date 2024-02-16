@@ -54,6 +54,7 @@ export const DeletedTaskButton = styled.button`
 
     &:hover {
       transition: colors 0.2s ease;
+      display: hidden;
       color: ${({ theme }) => theme.red};
     }
   }
