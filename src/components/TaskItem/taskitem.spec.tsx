@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { Checkbox } from "../CheckBox";
 
 describe("Task Item component", () => {
-  it("should check chebox", () => {
+  it("should mark the input box with a check if the checked option is true", () => {
     const handleCheckedMock = jest.fn();
 
     const wrapper = render(
