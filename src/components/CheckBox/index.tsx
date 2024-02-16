@@ -15,7 +15,7 @@ export function Checkbox({ checked, ...props }: CheckboxProps) {
     <CheckboxContainer>
       <HiddenCheckbox checked={checked} {...props} />
       <StyledCheckbox checked={checked}>
-        <Icon viewBox="0 0 24 24">
+        <Icon viewBox="0 0 24 24" data-testid="checkbox-icon">
           <polyline points="20 6 9 17 4 12" />
         </Icon>
       </StyledCheckbox>
