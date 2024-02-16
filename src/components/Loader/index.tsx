@@ -13,8 +13,8 @@ export function Loader({ isLoading }: LoaderProps) {
 
   return (
     <ReactPortal containerId="loader-root">
-      <Overlay>
-        <Spinner size={64} />
+      <Overlay data-testid="overlay">
+        <Spinner size={64} data-testid="spinner" />
       </Overlay>
     </ReactPortal>
   );
