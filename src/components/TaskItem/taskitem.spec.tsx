@@ -8,7 +8,7 @@ describe("Task Item component", () => {
 
     const wrapper = render(
       <div onClick={handleCheckedMock} data-testid="div-checkbox">
-        <Checkbox checked onChange={handleCheckedMock} />
+        <Checkbox checked={true} onChange={handleCheckedMock} />
       </div>
     );
 
