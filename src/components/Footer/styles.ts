@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 interface FiltersButtonProps {
@@ -36,15 +37,20 @@ export const SummaryTodos = styled.div`
   }
 `;
 
-export const FiltersButton = styled.button<FiltersButtonProps>`
+export const FiltersButton = styled(NavLink)`
   padding: 0.3rem 0.5rem;
   border: 0;
   cursor: pointer;
   border-radius: 2px;
   transition: border ease-in 0.2s;
-  border: 1px solid
-    ${(props) => (props.$isActive ? props.theme["red"] : props.theme["white"])};
+  text-decoration: none;
+  color: ${(props) => props.theme["gray-600"]};
 
+  border: 1px solid ${(props) => props.theme["white"]};
+
+  &.active {
+    border: 1px solid ${(props) => props.theme["red"]};
+  }
   &:hover {
     border: 1px solid ${(props) => props.theme["red"]};
   }

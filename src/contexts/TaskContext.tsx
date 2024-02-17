@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Loader } from "../components/Loader";
 import { ITask } from "../entities/Task";
 import { tasksService } from "../services/tasks";
@@ -20,8 +20,15 @@ export const TaskContext = createContext({} as TaskProviderValue);
 export function TaskProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchParams] = useSearchParams();
-  const filter = searchParams.get("todos");
+  const { pathname: route } = useLocation();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (route === "/") {
+      navigate("/all");
+    }
+  }, [navigate, route]);
 
   const loadTasks = useCallback(async () => {
     try {
@@ -40,10 +47,10 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
   }, [loadTasks]);
 
   const filteredTasks = () => {
-    switch (filter) {
-      case "active":
+    switch (route) {
+      case "/active":
         return tasks.filter((task) => !task.isDone);
-      case "completed":
+      case "/completed":
         return tasks.filter((tasks) => tasks.isDone);
       default:
         return tasks;
