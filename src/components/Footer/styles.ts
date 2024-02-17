@@ -1,9 +1,4 @@
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-
-interface FiltersButtonProps {
-  $isActive: boolean;
-}
 
 export const FooterContainer = styled.div`
   display: flex;
@@ -34,24 +29,5 @@ export const FooterContainer = styled.div`
 export const SummaryTodos = styled.div`
   span {
     font-size: 0.9rem;
-  }
-`;
-
-export const FiltersButton = styled(NavLink)`
-  padding: 0.3rem 0.5rem;
-  border: 0;
-  cursor: pointer;
-  border-radius: 2px;
-  transition: border ease-in 0.2s;
-  text-decoration: none;
-  color: ${(props) => props.theme["gray-600"]};
-
-  border: 1px solid ${(props) => props.theme["white"]};
-
-  &.active {
-    border: 1px solid ${(props) => props.theme["red"]};
-  }
-  &:hover {
-    border: 1px solid ${(props) => props.theme["red"]};
   }
 `;
