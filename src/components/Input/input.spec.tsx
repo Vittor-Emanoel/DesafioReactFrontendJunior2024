@@ -4,6 +4,16 @@ import { ChevronIcon } from "../../assets/icons/chevron";
 import { TaskContext } from "../../contexts/TaskContext";
 import { IconContainer } from "./styles";
 
+const mockTaskContextValue = {
+  isClearCompleted: jest.fn(),
+  tasks: [],
+  totalOutstanding: 5,
+  handleAddItem: jest.fn(),
+  deleteTasks: jest.fn(),
+  updatedItemHandler: jest.fn(),
+  handleToggleAllDone: jest.fn(),
+};
+
 describe("Input Component", () => {
   it("should render correctly with placeholder", () => {
     render(<Input placeholder="What needs to be done?" />);
@@ -13,20 +23,8 @@ describe("Input Component", () => {
   });
 
   it("should call handleAddItem function when form is submitted", () => {
-    const handleAddItemMock = jest.fn();
-
     render(
-      <TaskContext.Provider
-        value={{
-          tasks: [],
-          totalOutstanding: 0,
-          handleAddItem: handleAddItemMock,
-          deleteTasks: jest.fn(),
-          updatedItemHandler: jest.fn(),
-          isClearCompleted: jest.fn(),
-          handleToggleAllDone: jest.fn(),
-        }}
-      >
+      <TaskContext.Provider value={mockTaskContextValue}>
         <Input value="trabalhar" placeholder="What needs to be done?" />
       </TaskContext.Provider>
     );
@@ -36,7 +34,7 @@ describe("Input Component", () => {
 
     fireEvent.submit(inputElement);
 
-    expect(handleAddItemMock).toHaveBeenCalledWith({
+    expect(mockTaskContextValue.handleAddItem).toHaveBeenCalledWith({
       id: expect.any(String),
       isDone: false,
       title: "trabalhar",
@@ -44,23 +42,11 @@ describe("Input Component", () => {
   });
 
   test("should call handleToggleAllDone function when iconContainer is clicked", () => {
-    const handleToggleAllDoneMock = jest.fn();
-
     render(
-      <TaskContext.Provider
-        value={{
-          tasks: [],
-          totalOutstanding: 0,
-          handleAddItem: jest.fn(),
-          deleteTasks: jest.fn(),
-          updatedItemHandler: jest.fn(),
-          isClearCompleted: jest.fn(),
-          handleToggleAllDone: handleToggleAllDoneMock,
-        }}
-      >
+      <TaskContext.Provider value={mockTaskContextValue}>
         <IconContainer
           data-testid="icon-container"
-          onClick={handleToggleAllDoneMock}
+          onClick={mockTaskContextValue.handleToggleAllDone}
         >
           {<ChevronIcon />}
         </IconContainer>
@@ -70,6 +56,6 @@ describe("Input Component", () => {
 
     fireEvent.click(iconContainer);
 
-    expect(handleToggleAllDoneMock).toHaveBeenCalled();
+    expect(mockTaskContextValue.handleToggleAllDone).toHaveBeenCalled();
   });
 });
