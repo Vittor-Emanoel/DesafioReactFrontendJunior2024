@@ -1,7 +1,8 @@
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { Tasks } from "../../components/Tasks";
-import { Container, PresentationContainer } from "./styles";
+import { Presentation } from "../../components/presentation";
+import { Container } from "./styles";
 
 export function Home() {
   return (
@@ -12,16 +13,7 @@ export function Home() {
         <Footer />
       </Container>
 
-      <PresentationContainer>
-        <small> Desenvolvido com ❤️ por </small>
-        <a
-          href="https://github.com/vittor-emanoel"
-          target="_blank"
-          rel="noreferrer"
-        >
-          @Vittor
-        </a>
-      </PresentationContainer>
+      <Presentation />
     </div>
   );
 }
