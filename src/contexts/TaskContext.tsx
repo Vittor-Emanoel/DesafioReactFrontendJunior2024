@@ -21,7 +21,6 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { pathname: route } = useLocation();
-
   const navigate = useNavigate();
 
   useEffect(() => {
