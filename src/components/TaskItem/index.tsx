@@ -34,7 +34,7 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
   return (
     <Container $mark={item.isDone}>
       {!isEditing && (
-        <div onClick={handleChecked}>
+        <div onClick={handleChecked} aria-label="Deletar todas as tasks">
           <Checkbox checked={item.isDone} onChange={handleChecked} />
         </div>
       )}
@@ -56,6 +56,7 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
       <DeletedTaskButton
         onClick={() => deleteTasks(item.id)}
         data-testid="delete-button"
+        aria-label="Deletar task"
       >
         <XIcon size={24} />
       </DeletedTaskButton>

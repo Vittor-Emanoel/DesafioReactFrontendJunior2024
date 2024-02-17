@@ -1,17 +1,11 @@
-import { FiltersButton } from "./styles";
+import { FiltersButton, FiltersContainer } from "./styles";
 
 export function Filters() {
   return (
-    <ul>
-      <li>
-        <FiltersButton to={"all"}>All</FiltersButton>
-      </li>
-      <li>
-        <FiltersButton to={"active"}>Active</FiltersButton>
-      </li>
-      <li>
-        <FiltersButton to={"completed"}>Completed</FiltersButton>
-      </li>
-    </ul>
+    <FiltersContainer>
+      <FiltersButton to={"all"}>All</FiltersButton>
+      <FiltersButton to={"active"}>Active</FiltersButton>
+      <FiltersButton to={"completed"}>Completed</FiltersButton>
+    </FiltersContainer>
   );
 }

@@ -1,6 +1,11 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+export const FiltersContainer = styled.div`
+  display: flex;
+  gap: 1.2rem;
+`;
+
 export const FiltersButton = styled(NavLink)`
   padding: 0.3rem 0.5rem;
   border: 0;
