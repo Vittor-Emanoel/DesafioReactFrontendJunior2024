@@ -8,7 +8,7 @@ export function Footer() {
 
   return (
     <FooterContainer>
-      <SummaryTodos>
+      <SummaryTodos data-testid="summary">
         <span>
           {totalOutstanding > 1
             ? `${totalOutstanding} items left!`
