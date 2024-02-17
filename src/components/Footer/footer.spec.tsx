@@ -48,14 +48,38 @@ describe("Footer component", () => {
   });
 
   it("should render correct message for single item", () => {
+    const totalOutstanding = 1;
+
     const wrapper = render(
       <TaskContext.Provider value={mockTaskContextValue}>
         <MemoryRouter>
           <SummaryTodos data-testid="summary">
             <span>
-              {mockTaskContextValue.totalOutstanding > 1
-                ? `${mockTaskContextValue.totalOutstanding} items left!`
-                : `${mockTaskContextValue.totalOutstanding} item left!`}
+              {totalOutstanding > 1
+                ? `${totalOutstanding} items left!`
+                : `${totalOutstanding} item left!`}
+            </span>
+          </SummaryTodos>
+        </MemoryRouter>
+      </TaskContext.Provider>
+    );
+
+    const total = wrapper.container.querySelector("span");
+
+    expect(total?.textContent).toBe("1 item left!");
+  });
+
+  it("should render correct message for multiple items", () => {
+    const totalOutstanding = 5;
+
+    const wrapper = render(
+      <TaskContext.Provider value={mockTaskContextValue}>
+        <MemoryRouter>
+          <SummaryTodos data-testid="summary">
+            <span>
+              {totalOutstanding > 1
+                ? `${totalOutstanding} items left!`
+                : `${totalOutstanding} item left!`}
             </span>
           </SummaryTodos>
         </MemoryRouter>
