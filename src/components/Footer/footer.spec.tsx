@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { Footer } from ".";
 import { TaskContext } from "../../contexts/TaskContext";
@@ -28,18 +28,21 @@ describe("Footer component", () => {
     expect(wrapper.getByText("Clear completed")).toBeInTheDocument();
   });
 
-  // it("calls isClearCompleted when 'Clear completed' button is clicked", () => {
-  //   // Renderiza o componente Footer com o contexto mockado
-  //   const { getByText } = render(
-  //     <TaskContext.Provider value={mockTaskContextValue}>
-  //       <Footer />
-  //     </TaskContext.Provider>
-  //   );
+  it("should called isClearCompleted when Clear completed button is clicked", () => {
+    const wrapper = render(
+      <TaskContext.Provider value={mockTaskContextValue}>
+        <MemoryRouter>
+          <Footer />
+        </MemoryRouter>
+      </TaskContext.Provider>
+    );
 
-  //   // Simula o clique no botão "Clear completed"
-  //   fireEvent.click(getByText("Clear completed"));
+    const clearCompletedButton = wrapper.getByRole("button", {
+      name: "Clear completed",
+    });
 
-  //   // Verifica se a função isClearCompleted foi chamada
-  //   expect(mockTaskContextValue.isClearCompleted).toHaveBeenCalledTimes(1);
-  // });
+    fireEvent.click(clearCompletedButton);
+
+    expect(mockTaskContextValue.isClearCompleted).toHaveBeenCalled();
+  });
 });
