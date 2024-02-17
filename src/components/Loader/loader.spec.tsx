@@ -5,7 +5,7 @@ describe("Loader Component", () => {
   it("should not render Loader component when isLoading is true", () => {
     const wrapper = render(<Loader isLoading={true} />);
 
-    const container = wrapper.queryByTestId("overlay");
+    const container = wrapper.getByTestId("overlay");
 
     expect(container).toBeInTheDocument();
   });

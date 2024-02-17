@@ -1,18 +1,28 @@
-import { fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { TaskItem } from ".";
 import { XIcon } from "../../assets/icons/xicon";
+import { TaskContext } from "../../contexts/TaskContext";
 import { Checkbox } from "../CheckBox";
 import { DeletedTaskButton } from "./styles";
 
-describe("Task Item component", () => {
-  const mockTask = {
-    id: "1",
-    title: "Test Task",
-    isDone: false,
-  };
-  const deleteTasksMock = jest.fn();
+const mockTaskContextValue = {
+  isClearCompleted: jest.fn(),
+  tasks: [],
+  totalOutstanding: 5,
+  handleAddItem: jest.fn(),
+  deleteTasks: jest.fn(),
+  updatedItemHandler: jest.fn(),
+  handleToggleAllDone: jest.fn(),
+};
 
+const mockTask = {
+  id: "1",
+  title: "Test Task",
+  isDone: false,
+};
+
+describe("Task Item component", () => {
   it("should mark the input box with a check if the checked option is true", () => {
     const handleCheckedMock = jest.fn();
 
@@ -36,22 +46,28 @@ describe("Task Item component", () => {
 
     const input = wrapper.getByDisplayValue("Test Task");
     const checkbox = wrapper.getByRole("checkbox");
-    fireEvent.doubleClick(input);
+
+    userEvent.dblClick(input);
 
     expect(checkbox).not.toBeInTheDocument();
   });
 
   it("should call onClick function when clicked", () => {
     const wrapper = render(
-      <DeletedTaskButton onClick={deleteTasksMock} data-testid="delete-button">
-        <XIcon size={24} />
-      </DeletedTaskButton>
+      <TaskContext.Provider value={mockTaskContextValue}>
+        <DeletedTaskButton
+          onClick={mockTaskContextValue.deleteTasks}
+          data-testid="delete-button"
+        >
+          <XIcon size={24} />
+        </DeletedTaskButton>
+      </TaskContext.Provider>
     );
 
     const deleteButton = wrapper.getByTestId("delete-button");
 
-    fireEvent.click(deleteButton);
+    userEvent.click(deleteButton);
 
-    expect(deleteTasksMock).toHaveBeenCalled();
+    expect(mockTaskContextValue.deleteTasks).toHaveBeenCalled();
   });
 });
