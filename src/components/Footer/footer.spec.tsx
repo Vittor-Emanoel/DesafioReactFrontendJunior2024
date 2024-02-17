@@ -2,6 +2,7 @@ import { fireEvent, render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { Footer } from ".";
 import { TaskContext } from "../../contexts/TaskContext";
+import { SummaryTodos } from "./styles";
 
 const mockTaskContextValue = {
   isClearCompleted: jest.fn(),
@@ -44,5 +45,25 @@ describe("Footer component", () => {
     fireEvent.click(clearCompletedButton);
 
     expect(mockTaskContextValue.isClearCompleted).toHaveBeenCalled();
+  });
+
+  it("should render correct message for single item", () => {
+    const wrapper = render(
+      <TaskContext.Provider value={mockTaskContextValue}>
+        <MemoryRouter>
+          <SummaryTodos data-testid="summary">
+            <span>
+              {mockTaskContextValue.totalOutstanding > 1
+                ? `${mockTaskContextValue.totalOutstanding} items left!`
+                : `${mockTaskContextValue.totalOutstanding} item left!`}
+            </span>
+          </SummaryTodos>
+        </MemoryRouter>
+      </TaskContext.Provider>
+    );
+
+    const total = wrapper.container.querySelector("span");
+
+    expect(total?.textContent).toBe("5 items left!");
   });
 });
