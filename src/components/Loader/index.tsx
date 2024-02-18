@@ -2,6 +2,8 @@ import ReactPortal from "../ReactPortal";
 import Spinner from "../Spinner";
 import { Overlay } from "./styles";
 
+import logo from "../../assets/logo (1).svg";
+
 interface LoaderProps {
   isLoading: boolean;
 }
@@ -14,7 +16,8 @@ export function Loader({ isLoading }: LoaderProps) {
   return (
     <ReactPortal containerId="loader-root">
       <Overlay data-testid="overlay">
-        <Spinner size={64} data-testid="spinner" />
+        <img src={logo} alt="todomvc logo" loading="eager" />
+        <Spinner size={32} data-testid="spinner" />
       </Overlay>
     </ReactPortal>
   );
