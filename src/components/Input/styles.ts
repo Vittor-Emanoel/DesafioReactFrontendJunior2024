@@ -5,7 +5,6 @@ export const InputContainer = styled.form`
   height: 65px;
   position: relative;
   display: flex;
-  z-index: 100;
 
   input {
     width: 100%;

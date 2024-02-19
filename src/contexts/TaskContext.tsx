@@ -91,6 +91,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
 
     if (allIsCompleted) {
       setSetAllTasks(true);
+      toast.success("Parabéns você concluiu todas as tarefas!");
     } else {
       setSetAllTasks((prevState) => !prevState);
     }
