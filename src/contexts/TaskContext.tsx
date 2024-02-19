@@ -5,6 +5,8 @@ import { Loader } from "../components/Loader";
 import { ITask } from "../entities/Task";
 import { tasksService } from "../services/tasks";
 
+import { Confetti } from "../components/Confetti";
+
 interface TaskProviderValue {
   tasks: ITask[];
   totalOutstanding: number;
@@ -20,6 +22,8 @@ export const TaskContext = createContext({} as TaskProviderValue);
 export function TaskProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [allTasksDone, setSetAllTasks] = useState(false);
+
   const { pathname: route } = useLocation();
   const navigate = useNavigate();
 
@@ -83,6 +87,14 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
       isDone: !allTasksAreDone,
     }));
 
+    const allIsCompleted = updatedTasks.every((task) => task.isDone);
+
+    if (allIsCompleted) {
+      setSetAllTasks(true);
+    } else {
+      setSetAllTasks((prevState) => !prevState);
+    }
+
     setTasks(updatedTasks);
   }
 
@@ -117,6 +129,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
         handleToggleAllDone,
       }}
     >
+      {allTasksDone && <Confetti show={allTasksDone} />}
       {children}
     </TaskContext.Provider>
   );

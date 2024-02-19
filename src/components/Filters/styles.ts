@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 export const FiltersContainer = styled.div`
   display: flex;
-  gap: 1.2rem;
+  font-size: 0.9rem;
+  gap: 0.5rem;
 `;
 
 export const FiltersButton = styled(NavLink)`
