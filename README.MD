@@ -12,6 +12,8 @@ Este projeto é uma implementação da lista de tarefas inspirada no Todo MVC. F
 | :-------------------------------------------: | :--------------------------------------------------: | :-------------------------------------: | :----------------------------------------------------------: | --------------------------------------------------- | ----------------------------------------------- |
 | ![Listagem de Todos](./images/list-tasks.png) | ![Tarefas concluidas](./images/allTaskCompleted.png) | ![Toggle Todos](./images/clearTask.png) | ![Limpa as que estão completas](./images/clearCompleted.png) | ![Tela de carregametento](./images/lauchScreen.png) | ![Validação](./images/createTaskValidation.png) |
 
+Deploy do projeto: [acessar](https://desafio-vittor.vercel.app/all)
+
 ## Como Iniciar
 
 Siga as instruções abaixo para começar:
