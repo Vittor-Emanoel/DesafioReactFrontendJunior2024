@@ -22,7 +22,7 @@ export const FooterContainer = styled.div`
   }
 `;
 
-export const SummaryTodos = styled.div`
+export const SummaryTasks = styled.div`
   span {
     font-size: 0.9rem;
   }

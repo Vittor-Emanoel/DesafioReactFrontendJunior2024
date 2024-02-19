@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { Footer } from ".";
 import { TaskContext } from "../../contexts/TaskContext";
-import { SummaryTodos } from "./styles";
+import { SummaryTasks } from "./styles";
 
 const mockTaskContextValue = {
   isClearCompleted: jest.fn(),
@@ -53,13 +53,13 @@ describe("Footer component", () => {
     const wrapper = render(
       <TaskContext.Provider value={mockTaskContextValue}>
         <MemoryRouter>
-          <SummaryTodos data-testid="summary">
+          <SummaryTasks data-testid="summary">
             <span>
               {totalOutstanding > 1
                 ? `${totalOutstanding} items left!`
                 : `${totalOutstanding} item left!`}
             </span>
-          </SummaryTodos>
+          </SummaryTasks>
         </MemoryRouter>
       </TaskContext.Provider>
     );
@@ -75,13 +75,13 @@ describe("Footer component", () => {
     const wrapper = render(
       <TaskContext.Provider value={mockTaskContextValue}>
         <MemoryRouter>
-          <SummaryTodos data-testid="summary">
+          <SummaryTasks data-testid="summary">
             <span>
               {totalOutstanding > 1
                 ? `${totalOutstanding} items left!`
                 : `${totalOutstanding} item left!`}
             </span>
-          </SummaryTodos>
+          </SummaryTasks>
         </MemoryRouter>
       </TaskContext.Provider>
     );

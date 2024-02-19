@@ -1,20 +1,20 @@
 import { useContext } from "react";
 import { TaskContext } from "../../contexts/TaskContext";
 import { Filters } from "../Filters";
-import { FooterContainer, SummaryTodos } from "./styles";
+import { FooterContainer, SummaryTasks } from "./styles";
 
 export function Footer() {
   const { isClearCompleted, totalOutstanding } = useContext(TaskContext);
 
   return (
     <FooterContainer>
-      <SummaryTodos data-testid="summary">
+      <SummaryTasks data-testid="summary">
         <span>
           {totalOutstanding > 1
             ? `${totalOutstanding} items left!`
             : `${totalOutstanding} item left!`}
         </span>
-      </SummaryTodos>
+      </SummaryTasks>
 
       <Filters />
 
