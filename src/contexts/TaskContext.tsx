@@ -22,7 +22,7 @@ export const TaskContext = createContext({} as TaskProviderValue);
 export function TaskProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [allTasksDone, setSetAllTasks] = useState(false);
+  const [allTasksDone, setAllTasksDone] = useState(false);
 
   const { pathname: route } = useLocation();
   const navigate = useNavigate();
@@ -48,6 +48,24 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     loadTasks();
   }, [loadTasks]);
+
+  useEffect(() => {
+    if (tasks.length === 0) {
+      return;
+    }
+    const checkAllTasksCompleted = () => {
+      const allTasksCompleted = tasks.every((task) => task.isDone);
+
+      if (allTasksCompleted) {
+        setAllTasksDone(true);
+        toast.success("Parabéns você concluiu todas as tarefas!");
+      } else {
+        setAllTasksDone(false);
+      }
+    };
+
+    checkAllTasksCompleted();
+  }, [tasks]);
 
   const filteredTasks = () => {
     switch (route) {
@@ -80,24 +98,14 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     setTasks([task, ...tasks]);
   }
 
-  function handleToggleAllDone() {
+  const handleToggleAllDone = useCallback(() => {
     const allTasksAreDone = tasks.every((task) => task.isDone);
     const updatedTasks = tasks.map((task) => ({
       ...task,
       isDone: !allTasksAreDone,
     }));
-
-    const allIsCompleted = updatedTasks.every((task) => task.isDone);
-
-    if (allIsCompleted) {
-      setSetAllTasks(true);
-      toast.success("Parabéns você concluiu todas as tarefas!");
-    } else {
-      setSetAllTasks((prevState) => !prevState);
-    }
-
     setTasks(updatedTasks);
-  }
+  }, [tasks]);
 
   function isClearCompleted() {
     setTasks(tasks.filter((item) => item.isDone !== true));
