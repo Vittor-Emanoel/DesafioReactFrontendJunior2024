@@ -6,6 +6,12 @@ Bem-vindo ao meu teste para desenvolvimento front-end na enContact.
 
 Este projeto é uma implementação da lista de tarefas inspirada no Todo MVC. Foi desenvolvido como parte do teste para a posição de desenvolvedor front-end na enContact. O objetivo principal é demonstrar minhas habilidades em TypeScript, CSS, gerenciamento de estado e integração com API.
 
+## Imagens
+
+|               Listagem de Todos               |                  Tarefas concluidas                  |        Todas as tarefas apagadas        |                 Limpa as que estão completas                 | Tela de carregamento                                | validando a criação de tarefa                   |
+| :-------------------------------------------: | :--------------------------------------------------: | :-------------------------------------: | :----------------------------------------------------------: | --------------------------------------------------- | ----------------------------------------------- |
+| ![Listagem de Todos](./images/list-tasks.png) | ![Tarefas concluidas](./images/allTaskCompleted.png) | ![Toggle Todos](./images/clearTask.png) | ![Limpa as que estão completas](./images/clearCompleted.png) | ![Tela de carregametento](./images/lauchScreen.png) | ![Validação](./images/createTaskValidation.png) |
+
 ## Como Iniciar
 
 Siga as instruções abaixo para começar:
@@ -33,42 +39,39 @@ Siga as instruções abaixo para começar:
    ```
 6. Abra [http://localhost:3000](http://localhost:3000) no seu navegador para visualizar o aplicativo.
 
-## Funcionalidades Implementadas
+## Features
 
-- Recuperação das tarefas iniciais via GET da [API](https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos)
-- Adição de novas tarefas (Só adiciona tarefas apartir de 2 letras)
-- Listagem das tarefas
-- Marcação e desmarcação de tarefas como concluídas
-- Remoção de tarefas
-- Edição de tarefas
-- Marcação de todas as tarefas como concluídas
-- Contagem de itens restantes
-- Limpeza de tarefas concluídas
-- Filtragem de tarefas por "Todos", "Ativos" e "Completos"
+- [x] Recuperação das tarefas iniciais via GET da [API](https://my-json-server.typicode.com/EnkiGroup/DesafioReactFrontendJunior2024/todos)
+- [x] Adição de novas tarefas
+- [x] Listagem das tarefas
+- [x] Marcação e desmarcação de tarefas como concluídas
+- [x] Contagem de itens restantes
+- [x] Limpeza de tarefas concluídas
+- [x] Filtragem de tarefas por "Todos", "Ativos" e "Completos"
 
-_as modificações estão sendo feitas no estado e não da 'api' em si. Então, ao recarregar a página as alterações não serão mantidas!_
+## Tecnologias & Padrões
 
-ps: eu tenho duas formas rápidas para manter as todos salvas:
+- [x] [ReactJs]
+- [x] [Typescrit]
+- [x] [Axios]
+- [x] [Styled-components]
+- [x] [Conventional-commits]
+- [x] [React Testing library & Jest]
 
-- 1 Local Storage
-- 2 Json Server
+### Testes Unitários e de Integração
 
-mas como a ideia é sempre manter as todos da api, não faz muito sentido utilizar desses recursos.
+- Os testes são organizados usando a biblioteca Jest e React Testing Library.
+- Para executar os testes, utilize o comando `yarn test`.
 
-## Tecnologias Utilizadas & Padrões
+### Decisões de Design e Implementação
 
-- React
-- TypeScript
-- Styled-components 
-- Conventional-commits
-- React Testing library & Jest
-
--Por que não utilzei o TailwindCss? pelo desafio de replicar a ui do TodoMVC sem nenhum atalho css que o Tailwind trás. As vezes nos apegamos as libs e nos esquemos das bases *-*_ 
+- Optei por utilizar o Styled-components pelo desafio de replicar a ui do TodoMVC sem nenhum atalho css que o Tailwind trás. As vezes nos apegamos as libs e nos esquemos das bases.
 
 ## Autor
 
-Vittor Emanoel - [Meu GitHub](https://github.com/Vittor-Emanoel)
-
-Desenvolvido com muito esforço e empenho!
+Vittor Emanoel, 21 anos - [Meu GitHub](https://github.com/Vittor-Emanoel)
+[Meu Linkedin](https://www.linkedin.com/in/vittor-emanoel-8971321b1/)
 
 "O sucesso é o encontro do preparo com a oportunidade" - Autor desconhecido
+
+Desenvolvido com muito esforço e empenho!
