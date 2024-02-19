@@ -2,7 +2,7 @@ import ReactPortal from "../ReactPortal";
 import Spinner from "../Spinner";
 import { Overlay } from "./styles";
 
-import logo from "../../assets/logo (1).svg";
+import logo from "../../assets/logo.svg";
 
 interface LoaderProps {
   isLoading: boolean;
