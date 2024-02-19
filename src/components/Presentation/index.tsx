@@ -1,10 +1,6 @@
-import { useContext } from "react";
-import { ThemeContext } from "../../contexts/ThemeContext";
 import { PresentationContainer } from "./styles";
 
 export function Presentation() {
-  const { toggleTheme, theme } = useContext(ThemeContext);
-
   return (
     <PresentationContainer>
       <small>Double-click to edit a todo</small>
@@ -17,10 +13,6 @@ export function Presentation() {
       >
         @Vittor
       </a>
-
-      <button type="button" onClick={toggleTheme}>
-        click
-      </button>
     </PresentationContainer>
   );
 }

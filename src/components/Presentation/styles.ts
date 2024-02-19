@@ -21,4 +21,11 @@ export const PresentationContainer = styled.div`
       text-decoration: underline;
     }
   }
+
+  button {
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+    background-color: ${({ theme }) => theme["gray-900"]};
+  }
 `;
