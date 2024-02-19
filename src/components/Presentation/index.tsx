@@ -3,7 +3,7 @@ import { PresentationContainer } from "./styles";
 export function Presentation() {
   return (
     <PresentationContainer>
-      <small>Double-click to edit a todo</small>
+      <small>Double-click para editar a tarefa</small>
       <small> Desenvolvido com ❤️ por </small>
 
       <a
