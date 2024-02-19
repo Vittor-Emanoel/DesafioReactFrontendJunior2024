@@ -78,25 +78,31 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  function updatedItemHandler({ id, title, isDone }: ITask) {
-    const updatedTasks = tasks.map((task) => {
-      if (task.id === id) {
-        return {
-          ...task,
-          title: title,
-          isDone: isDone,
-        };
-      }
+  const updatedItemHandler = useCallback(
+    ({ id, title, isDone }: ITask) => {
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === id) {
+          return {
+            ...task,
+            title: title,
+            isDone: isDone,
+          };
+        }
 
-      return task;
-    });
+        return task;
+      });
 
-    setTasks(updatedTasks);
-  }
+      setTasks(updatedTasks);
+    },
+    [tasks]
+  );
 
-  function handleAddItem(task: ITask) {
-    setTasks([task, ...tasks]);
-  }
+  const handleAddItem = useCallback(
+    (task: ITask) => {
+      setTasks([task, ...tasks]);
+    },
+    [tasks]
+  );
 
   const handleToggleAllDone = useCallback(() => {
     const allTasksAreDone = tasks.every((task) => task.isDone);
@@ -107,13 +113,16 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     setTasks(updatedTasks);
   }, [tasks]);
 
-  function isClearCompleted() {
+  const isClearCompleted = useCallback(() => {
     setTasks(tasks.filter((item) => item.isDone !== true));
-  }
+  }, [tasks]);
 
-  function deleteTasks(taskId: string) {
-    setTasks(tasks.filter((task) => task.id !== taskId));
-  }
+  const deleteTasks = useCallback(
+    (taskId: string) => {
+      setTasks(tasks.filter((task) => task.id !== taskId));
+    },
+    [tasks]
+  );
 
   const totalOutstanding = tasks.reduce((acc, value) => {
     if (!value.isDone) {
