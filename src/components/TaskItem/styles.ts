@@ -29,7 +29,6 @@ export const Container = styled.div<InputCustomProps>`
     outline: none;
     border: none;
     background: #fff;
-    z-index: -100;
     flex: 1;
     cursor: pointer;
     border: 1px solid ${({ theme }) => theme["border"]};
