@@ -23,15 +23,8 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [allTasksDone, setAllTasksDone] = useState(false);
-
   const { pathname: route } = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (route === "/") {
-      navigate("/all");
-    }
-  }, [navigate, route]);
 
   const loadTasks = useCallback(async () => {
     try {
@@ -44,6 +37,12 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (route === "/") {
+      navigate("/all");
+    }
+  }, [navigate, route]);
 
   useEffect(() => {
     loadTasks();
@@ -139,9 +138,9 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     <TaskContext.Provider
       value={{
         tasks: filteredTasks(),
+        totalOutstanding,
         deleteTasks,
         handleAddItem,
-        totalOutstanding,
         isClearCompleted,
         updatedItemHandler,
         handleToggleAllDone,
