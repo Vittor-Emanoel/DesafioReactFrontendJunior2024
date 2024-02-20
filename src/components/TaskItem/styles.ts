@@ -42,6 +42,29 @@ export const Container = styled.div<InputCustomProps>`
   }
 `;
 
+export const EditInput = styled.input<InputCustomProps>`
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 0.938rem 5rem 0.938rem 3.75rem;
+  outline: none;
+  border: none;
+  background: #fff;
+  flex: 1;
+  cursor: pointer;
+  border: 1px solid ${({ theme }) => theme["border"]};
+  text-decoration: ${(props) => (props.$mark ? "line-through" : "none")};
+  color: ${(props) =>
+    props.$mark ? props.theme["completed"] : props.theme["gray-500"]};
+
+  &:focus {
+    border: 2px solid ${({ theme }) => theme["red"]};
+  }
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+`;
+
 export const DeletedTaskButton = styled.button`
   width: 50px;
   position: absolute;

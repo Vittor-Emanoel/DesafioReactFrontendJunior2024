@@ -4,7 +4,7 @@ import { XIcon } from "../../assets/icons/xicon";
 import { TaskContext } from "../../contexts/TaskContext";
 import { ITask } from "../../entities/Task";
 import { Checkbox } from "../CheckBox";
-import { Container, DeletedTaskButton } from "./styles";
+import { Container, DeletedTaskButton, EditInput } from "./styles";
 
 interface TaskItemProps extends ComponentProps<"input"> {
   item: ITask;
@@ -39,8 +39,9 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
         </div>
       )}
       {isEditing ? (
-        <input
+        <EditInput
           type="text"
+          id="textinput"
           defaultValue={inputTitle}
           onChange={handleChangeTitle}
           onBlur={handleEdit}
@@ -53,6 +54,7 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
           defaultValue={inputTitle}
           onDoubleClick={() => setIsEditing(true)}
           readOnly={!isEditing}
+          autoFocus
         />
       )}
       <DeletedTaskButton
