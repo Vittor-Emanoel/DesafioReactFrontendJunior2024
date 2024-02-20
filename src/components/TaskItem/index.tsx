@@ -44,13 +44,15 @@ export function TaskItem({ item, ...props }: TaskItemProps) {
           defaultValue={inputTitle}
           onChange={handleChangeTitle}
           onBlur={handleEdit}
+          autoFocus
           {...props}
         />
       ) : (
         <input
           type="text"
-          onDoubleClick={() => setIsEditing(true)}
           defaultValue={inputTitle}
+          onDoubleClick={() => setIsEditing(true)}
+          readOnly={!isEditing}
         />
       )}
       <DeletedTaskButton
